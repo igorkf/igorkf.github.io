@@ -1,0 +1,21 @@
+---
+title: "Publications"
+about:
+  template: jolla
+  links:
+    # - icon: twitter
+    #   text: Twitter
+    #   href: https://twitter.com
+    - icon: github
+      text: Github
+      href: https://github.com/igorkf/
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/igorkuivjogi/
+---
+
+::: {.justify}
+
+- Heinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & **Fernandes, I. K**. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in Brazil. *Field Crops Research.* ([10.1016/j.fcr.2022.108628](https://doi.org/10.1016/j.fcr.2022.108628))
+
+:::
