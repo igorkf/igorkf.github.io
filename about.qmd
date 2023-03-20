@@ -10,8 +10,13 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/igorkuivjogi/
+    - icon: google
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=fo6kWzgAAAAJ/
 ---
 
-Originally from São Paulo, SP, Brazil, I speak Portuguese (pt-br 🇧🇷), but now I'm living in Arkansas, US. After working for some time in the industry right after high school, I decided to start a bachelor's degree in Statistics at the Federal University of Goiás (Brazil's midwest), wherein in my last two years I was an undergraduate researcher at Embrapa Rice and Beans ^[the Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.]. We analyzed agricultural data and tried to make sense of environmental drivers in the yield of rice and beans and I started to like to work with agricultural statistics. Now I'm doing a master's degree in Statistics and Analytics at the University of Arkansas.
+Originally from São Paulo, SP, Brazil, Portuguese native speaker, but now living in Arkansas, US. After working for some time in the industry right after high school, I decided to start a bachelor's degree in Statistics at the Federal University of Goiás (Brazil's midwest), wherein in my last two years I was an undergraduate researcher at Embrapa Rice and Beans [^1]. We analyzed agricultural data and tried to make sense of environmental drivers in the yield of rice and beans and I started to like to work with agricultural statistics. Now I'm doing a master's degree in Statistics and Analytics at the University of Arkansas.
 
-My first programming language was C, followed by R and Python.   
+[^1]: The Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.
+
+My first programming language was C, followed by R and Python.

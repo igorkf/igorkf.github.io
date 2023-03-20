@@ -1,14 +1,29 @@
 ---
 title: ""
 listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
+  - id: posts
+    contents: posts/**/*/index.qmd
+    type: grid
+    fields: [title, description, image, date]
+    sort: "date desc"
+    sort-ui: false
+    filter-ui: false
+    page-size: 3
 page-layout: full
 title-block-banner: true
 ---
 
-Hi! My name is Igor Kuivjogi Fernandes. 
+Hi! My name is Igor Kuivjogi Fernandes and I'm working as a Graduate Research Assistant at the Agricultural Statistics Lab at the University of Arkansas. On this website, you can see my thoughts and papers associated with my research.
+
+## Recent posts
+
+::: {#posts}
+:::
+
+<a href="../posts/index.html"> <button type="button" class="btn btn-primary float-end btn-sm">See all</button></a><br>
+
+## Education
+
+-   2023-present: MSc in Statistics and Analytics, University of Arkansas, U.S.
+
+-   2017-2022: BSc in Statistics, Federal University of Goiás, Brazil

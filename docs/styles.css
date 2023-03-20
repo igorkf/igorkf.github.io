@@ -13,3 +13,15 @@
   padding-top: 1.5em;
   padding-bottom: 0.5em;
 }
+
+.btn-primary {
+  color: #444;
+  background-color: #dcdcdc;
+  border-color: #dcdcdc;
+}
+
+.btn-primary:hover {
+  color: #084093;
+  background-color: #dcdcdc;
+  border-color: #dcdcdc;
+}

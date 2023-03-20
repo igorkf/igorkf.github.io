@@ -4,15 +4,20 @@ project:
 
 website:
   title: "Igor Kuivjogi Fernandes"
+  page-footer:
+    left: "Blog made with [Quarto](https://quarto.org/), by Igor Kuivjogi Fernandes. License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
   navbar:
     background: "#DCDCDC"
     right:
+      - posts/index.qmd
       - publications.qmd
       - about.qmd
       - icon: github
         href: https://github.com/igorkf/
       - icon: linkedin
         href: https://www.linkedin.com/in/igorkuivjogi/
+      - icon: google
+        href: https://scholar.google.com/citations?user=fo6kWzgAAAAJ/
 format:
   html:
     theme: default
