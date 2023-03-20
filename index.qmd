@@ -24,6 +24,6 @@ Hi! My name is Igor Kuivjogi Fernandes and I'm working as a Graduate Research As
 
 ## Education
 
--   2023-present: MSc in Statistics and Analytics, University of Arkansas, U.S.
+* **2023-present**: MSc in Statistics and Analytics, University of Arkansas, U.S.
 
--   2017-2022: BSc in Statistics, Federal University of Goiás, Brazil
+* **2017-2022**: BSc in Statistics, Federal University of Goiás, Brazil

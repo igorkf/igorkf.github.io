@@ -3,16 +3,6 @@ title: "About"
 image: profile.jpg
 about:
   template: trestles
-  links:
-    - icon: github
-      text: GitHub
-      href: https://github.com/igorkf/
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/igorkuivjogi/
-    - icon: google
-      text: Google Scholar
-      href: https://scholar.google.com/citations?user=fo6kWzgAAAAJ/
 ---
 
 Originally from São Paulo, SP, Brazil, Portuguese native speaker, but now living in Arkansas, US. After working for some time in the industry right after high school, I decided to start a bachelor's degree in Statistics at the Federal University of Goiás (Brazil's midwest), wherein in my last two years I was an undergraduate researcher at Embrapa Rice and Beans [^1]. We analyzed agricultural data and tried to make sense of environmental drivers in the yield of rice and beans and I started to like to work with agricultural statistics. Now I'm doing a master's degree in Statistics and Analytics at the University of Arkansas.
