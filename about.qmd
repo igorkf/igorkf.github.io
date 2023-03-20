@@ -4,11 +4,8 @@ image: profile.jpg
 about:
   template: jolla
   links:
-    # - icon: twitter
-    #   text: Twitter
-    #   href: https://twitter.com
     - icon: github
-      text: Github
+      text: GitHub
       href: https://github.com/igorkf/
     - icon: linkedin
       text: LinkedIn

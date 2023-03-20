@@ -1,1 +1,15 @@
-/* css styles */
+/* tested on "default" theme */
+.quarto-title-block .quarto-title-banner {
+  color: #444444;
+}
+
+.quarto-title-banner {
+  margin-bottom: 1em;
+  color: #444;
+  background: white;
+}
+
+.quarto-title-banner {
+  padding-top: 1.5em;
+  padding-bottom: 0.5em;
+}
