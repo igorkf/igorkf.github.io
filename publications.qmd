@@ -3,6 +3,7 @@ title: "Publications"
 about:
   template: solana
 bibliography: references.bib
+csl: apa.csl
 nocite: |
   @*
 ---
@@ -10,9 +11,10 @@ nocite: |
 ::: {#refs}
 :::
 
-
 <!-- ::: {style="text-align: justify"} -->
+
 <!-- ### 2022 -->
 
 <!-- -   Heinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & **Fernandes, I. K**. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in Brazil. *Field Crops Research*.<a href="https://doi.org/10.1016/j.fcr.2022.108628"><i class="bi bi-link btn-lg"></i></a> -->
+
 <!-- ::: -->
