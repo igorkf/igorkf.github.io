@@ -4,7 +4,6 @@ date: "2024-01-15"
 date-modified: last-modified
 categories: [R, GBLUP, BGLR, asreml]
 draft: false
-comments: false
 bibliography: references.bib
 image: images/wheat.jpg
 ---
@@ -234,3 +233,8 @@ abline(coef = c(0, 1), col = "blue", lty = 2)
 In both cases (single model and MET model), the `varG` differed a little bit among packages. I don't know why is that, but if you know I would be happy to see the explanation. Apart from that, the results are very similar.
 
 I hope you enjoyed this comparison! Let me know if you have any comments or issues.
+
+```{r}
+sessionInfo()
+```
+
