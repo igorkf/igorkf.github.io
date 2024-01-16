@@ -2,15 +2,13 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
+      "/posts/2024-01-15-gblup-bglr-asreml/index.html"
     ]
   },
   {
     "listing": "/posts/index.html",
     "items": [
-      "/posts/post-with-code/index.html",
-      "/posts/welcome/index.html"
+      "/posts/2024-01-15-gblup-bglr-asreml/index.html"
     ]
   }
 ]

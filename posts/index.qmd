@@ -4,7 +4,7 @@ listing:
   - id: talks
     contents: "index.qmd"
     type: grid
-    fields: [image, date, title, subtitle]
+    fields: [title, description, image, date, reading-time]
     sort: "date desc"
     categories: numbered
     sort-ui: true

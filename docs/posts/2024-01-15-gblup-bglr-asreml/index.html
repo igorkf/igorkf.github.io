@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2024-01-15">
+
+<title>Igor Kuivjogi Fernandes - Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Igor Kuivjogi Fernandes</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts/index.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications.html">
+ <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/igorkf/"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/igorkuivjogi/"><i class="bi bi-linkedin" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=fo6kWzgAAAAJ&amp;hl=en&amp;oi=ao"><i class="bi bi-google" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">GBLUP</div>
+                <div class="quarto-category">BGLR</div>
+                <div class="quarto-category">asreml</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 15, 2024</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 15, 2024</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Mostly, I have been using the package <code>asreml</code> <span class="citation" data-cites="asreml2023">(<a href="#ref-asreml2023" role="doc-biblioref">The VSNi Team 2023</a>)</span> for fitting genomic prediction models. This year I started to read some papers about fitting GBLUP models. For example, I read the reaction norm paper <span class="citation" data-cites="jarquin2014">(<a href="#ref-jarquin2014" role="doc-biblioref">Jarquín et al. 2014</a>)</span> and the <code>BGLR</code> package paper <span class="citation" data-cites="perez2014">(<a href="#ref-perez2014" role="doc-biblioref">Pérez and Campos 2014</a>)</span>. I noticed both papers used the <code>BGLR</code> package, so I wondered if I could get similar results with <code>asreml</code>. This post is an attempt to compare results from <code>BGLR</code> and <code>asreml</code> packages when fitting GBLUP models in single and multi-environment trials (MET).</p>
+</section>
+<section id="dataset" class="level1">
+<h1>Dataset</h1>
+<p>To compare both packages, we are going to use a MET dataset from the <code>BGLR</code> package, which comprises 599 historical CIMMYT wheat lines. The phenotypic trait is the average grain yield of these 599 wheat lines, evaluated in four environments. The trait was standardized to have null mean and unit variance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BGLR) </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(asreml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Carregando pacotes exigidos: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Online License checked out Mon Jan 15 18:01:40 2024</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading ASReml-R version 4.2</code></pre>
+</div>
+</div>
+</section>
+<section id="single-environment-gblup" class="level1">
+<h1>Single environment GBLUP</h1>
+<p>The first case is fitting a GBLUP for a single environment (here we consider the first).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(wheat, <span class="at">package =</span> <span class="st">"BGLR"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ?wheat  # to know more about it</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># phenotypes</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>wheat.Y <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(wheat.Y)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(wheat.Y) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"y"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(wheat.Y) <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>wheat.Y<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(wheat.Y))  <span class="co"># fake genotype names </span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> wheat.Y[, <span class="dv">1</span>]  <span class="co"># get yield from first environment</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wheat.Y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          y1          y2          y3         y4 name
+1  1.6716295 -1.72746986 -1.89028479  0.0509159    1
+2 -0.2527028  0.40952243  0.30938553 -1.7387588    2
+3  0.3418151 -0.64862633 -0.79955921 -1.0535691    3
+4  0.7854395  0.09394919  0.57046773  0.5517574    4
+5  0.9983176 -0.28248062  1.61868192 -0.1142848    5
+6  2.3360969  0.62647587  0.07353311  0.7195856    6</code></pre>
+</div>
+</div>
+<p>The columns <code>y1</code> to <code>y4</code> represent the yield of each environment. I used fake numbers (1 to 599) to name each genotype in the column <code>name</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># markers</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> wheat.X </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X) </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  599 1279</code></pre>
+</div>
+</div>
+<p>We have 599 individuals and 1279 markers.</p>
+</section>
+<section id="cross-validation-cv" class="level1">
+<h1>Cross-validation (CV)</h1>
+<p>We are going to evaluate the CV1 scheme (predicting unobserved genotypes), therefore 100 random genotypes will be hold as testing set. Remember, we are using the phenotypes from the first environment stored in <code>y</code>. In the <code>BGLR</code> package, we can mask the test set by setting the phenotypes to <code>NA</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>yNA <span class="ot">&lt;-</span> y </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>) </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>tst <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="at">size =</span> <span class="dv">100</span>, <span class="at">replace =</span> F)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>yNA[tst] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>tst</code> object holds integers that shows which rows are to be used as the testing set, and we are going to use them to calculate the test set accuracy.</p>
+</section>
+<section id="computing-g-matrix" class="level1">
+<h1>Computing G matrix</h1>
+<p>I am computing the genomic relationship matrix as described in the BGLR paper <span class="citation" data-cites="perez2014">(<a href="#ref-perez2014" role="doc-biblioref">Pérez and Campos 2014</a>, see Box 9)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">scale</span>(X, <span class="at">center =</span> T, <span class="at">scale =</span> T)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>G <span class="ot">&lt;-</span> (X <span class="sc">%*%</span> <span class="fu">t</span>(X)) <span class="sc">/</span> p  <span class="co"># same as tcrossprod(X) / p</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(G) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(G) <span class="ot">&lt;-</span> <span class="fu">levels</span>(wheat.Y<span class="sc">$</span>name)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(G)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 599 599</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>G[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           1           2           3         4           5
+1 1.11819432  0.06109962  0.05387119 0.2473040  0.44643151
+2 0.06109962  1.44217931  1.42698671 0.1103435 -0.01189792
+3 0.05387119  1.42698671  1.44527589 0.1062722 -0.00525292
+4 0.24730400  0.11034351  0.10627223 0.8733090  0.22284413
+5 0.44643151 -0.01189792 -0.00525292 0.2228441  0.84811023</code></pre>
+</div>
+</div>
+</section>
+<section id="gblup-in-bglr" class="level1">
+<h1>GBLUP in BGLR</h1>
+<p>Fitting GBLUP in <code>BGLR</code> requires us to set a linear predictor (<code>ETA</code>).<br>
+In this case, we are using only one kernel, i.e., the covariance matrix <code>G</code>. If you want to check the iterations, set <code>verbose = T</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ETA <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">K =</span> G, <span class="at">model =</span> <span class="st">"RKHS"</span>)) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>fm1 <span class="ot">&lt;-</span> <span class="fu">BGLR</span>(<span class="at">y =</span> yNA, <span class="at">ETA =</span> ETA, <span class="at">nIter =</span> <span class="dv">5000</span>, <span class="at">burnIn =</span> <span class="dv">1000</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">saveAt =</span> <span class="st">"GBLUP_"</span>, <span class="at">verbose =</span> F) </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>pred_gblup_bglr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> wheat.Y[tst, <span class="st">"name"</span>],</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> y[tst], </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">yhat =</span> fm1<span class="sc">$</span>yHat[tst]</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_bglr<span class="sc">$</span>y, pred_gblup_bglr<span class="sc">$</span>yhat)  <span class="co"># correlation between observed and predicted values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5601514</code></pre>
+</div>
+</div>
+<p>Note: if you get an LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+</section>
+<section id="gblup-in-asreml" class="level1">
+<h1>GBLUP in asreml</h1>
+<p>Fitting GBLUP in <code>asreml</code> requires us to pass the covariance matrix <code>G</code> in the <code>vm</code> object. Now, we can just fit the model removing the testing samples with <code>wheat.Y[-tst, ]</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y1 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y[<span class="sc">-</span>tst, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ASReml Version 4.2 15/01/2024 18:01:48
+          LogLik        Sigma2     DF     wall
+ 1     -232.3355     0.8552212    498   18:01:48
+ 2     -224.1149     0.7898886    498   18:01:48
+ 3     -214.8656     0.6987314    498   18:01:48
+ 4     -209.2359     0.6131716    498   18:01:48
+ 5     -207.4308     0.5509318    498   18:01:49
+ 6     -207.3177     0.5335289    498   18:01:49
+ 7     -207.3163     0.5315242    498   18:01:49</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> wheat.Y[tst, <span class="st">"y1"</span>], </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(mod1, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[tst, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ASReml Version 4.2 15/01/2024 18:01:49
+          LogLik        Sigma2     DF     wall
+ 1     -207.3163     0.5313973    498   18:01:49
+ 2     -207.3163     0.5313950    498   18:01:49
+ 3     -207.3163     0.5313899    498   18:01:49</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5596302</code></pre>
+</div>
+</div>
+<p>Comparing both packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>comp1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="fu">c</span>(<span class="st">"BGLR"</span>, <span class="st">"asreml"</span>), </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">varG =</span> <span class="fu">c</span>(fm1<span class="sc">$</span>ETA[[<span class="dv">1</span>]]<span class="sc">$</span>varU, <span class="fu">summary</span>(mod1)<span class="sc">$</span>varcomp[<span class="dv">1</span>, <span class="st">"component"</span>]),  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">varE =</span> <span class="fu">c</span>(fm1<span class="sc">$</span>varE, <span class="fu">summary</span>(mod1)<span class="sc">$</span>varcomp[<span class="dv">2</span>, <span class="st">"component"</span>]),  </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">c</span>(<span class="fu">cor</span>(pred_gblup_bglr<span class="sc">$</span>y, pred_gblup_bglr<span class="sc">$</span>yhat),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>comp1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  package      varG      varE  accuracy
+1    BGLR 0.5859860 0.5388088 0.5601514
+2  asreml 0.5736408 0.5315242 0.5596302</code></pre>
+</div>
+</div>
+<p>where <code>varG</code> is the genetic variance, <code>varE</code> is the residual variance, and <code>accuracy</code> is the Pearson’s correlation between observed and predicted values (considering only the test set). The results are similar.</p>
+<div class="cell" data-fig.asp="1">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_bglr, pred_gblup_asreml, <span class="at">by =</span> <span class="st">"name"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred<span class="sc">$</span>yhat, pred<span class="sc">$</span>predicted.value, </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"BGLR predictions"</span>, <span class="at">ylab =</span> <span class="st">"asreml predictions"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">coef =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+</section>
+<section id="met-gblup" class="level1">
+<h1>MET GBLUP</h1>
+<p>Now let’s consider when we have more than one environment. This data has four.</p>
+<p>We reshape the data from wide (four environments, one column per environment) to long (one column for all environments stacked).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>wheat.Y.long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(wheat.Y, <span class="at">direction =</span> <span class="st">"long"</span>, <span class="at">varying =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">timevar =</span> <span class="st">"env"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>wheat.Y.long<span class="sc">$</span>id <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(wheat.Y.long) <span class="ot">&lt;-</span> <span class="cn">NULL</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>wheat.Y.long<span class="sc">$</span>env <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(wheat.Y.long<span class="sc">$</span>env) </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(wheat.Y.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2396    3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wheat.Y.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  name env          y
+1    1   1  1.6716295
+2    2   1 -0.2527028
+3    3   1  0.3418151
+4    4   1  0.7854395
+5    5   1  0.9983176
+6    6   1  2.3360969</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(wheat.Y.long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     name env         y
+2391  594   4 1.7915575
+2392  595   4 1.6596565
+2393  596   4 0.5543848
+2394  597   4 1.8487169
+2395  598   4 2.6928141
+2396  599   4 0.3813174</code></pre>
+</div>
+</div>
+<p>Remember, <code>name</code> are the genotypes, and <code>env</code> are the environments.</p>
+<p>Now we mask again, but now the response is in the long format. We will search for the rows where the genotypes were in the test set in the previous example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ylong <span class="ot">&lt;-</span> wheat.Y.long[, <span class="st">"y"</span>] </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ylongNA <span class="ot">&lt;-</span> ylong </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>tstlong <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(wheat.Y.long[wheat.Y.long<span class="sc">$</span>name <span class="sc">%in%</span> wheat.Y[tst, <span class="st">"name"</span>], ])</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>ylongNA[tstlong] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(tstlong)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 400</code></pre>
+</div>
+</div>
+</section>
+<section id="met-bglup-in-bglr" class="level1">
+<h1>MET BGLUP in BGLR</h1>
+<p>As the genotypes are repeated across environments, we need to expand the covariance matrix <code>G</code> to account for the repetitions. To do this, we perform <span class="math inline">\(Z G Z ^{'}\)</span>, where <span class="math inline">\(Z\)</span> is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, <span class="math inline">\(G\)</span> is the genetic relationship matrix, and <span class="math inline">\(Z\)</span> is the incidence matrix transposed, as explained in <span class="citation" data-cites="jarquin2014">Jarquín et al. (<a href="#ref-jarquin2014" role="doc-biblioref">2014</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">model.matrix</span>(<span class="fu">lm</span>(y <span class="sc">~</span> name <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> wheat.Y.long))) </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ZGZt <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> G <span class="sc">%*%</span> <span class="fu">t</span>(Z) </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(ZGZt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2396 2396</code></pre>
+</div>
+</div>
+<p>Note that the <span class="math inline">\(Z G Z^{'}\)</span> matrix has dimension <span class="math inline">\(n \times n\)</span>, i.e., it matches the dimension of repeated genotypes across environments. You can play with <code>Z</code> to see how it looks like.</p>
+<p>Now we pass the kernel <span class="math inline">\(Z G Z^{'}\)</span> (instead of <span class="math inline">\(G\)</span>) in the linear predictor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ETA <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">K =</span> ZGZt, <span class="at">model =</span> <span class="st">"RKHS"</span>)) </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">BGLR</span>(<span class="at">y =</span> ylongNA, <span class="at">ETA =</span> ETA, <span class="at">nIter =</span> <span class="dv">5000</span>, <span class="at">burnIn =</span> <span class="dv">1000</span>, </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">saveAt =</span> <span class="st">"MET_BGLUP_"</span>, <span class="at">verbose =</span> F)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>pred_gblup_bglr <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> wheat.Y.long[tstlong, <span class="st">"name"</span>],</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">env =</span> wheat.Y.long[tstlong, <span class="st">"env"</span>],</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ylong[tstlong], </span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">yhat =</span> fm2<span class="sc">$</span>yHat[tstlong]</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_bglr<span class="sc">$</span>y, pred_gblup_bglr<span class="sc">$</span>yhat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3111166</code></pre>
+</div>
+</div>
+</section>
+<section id="met-gblup-in-asreml" class="level1">
+<h1>MET GBLUP in asreml</h1>
+<p>In <code>asreml</code> we can pass directly the <span class="math inline">\(G\)</span> matrix without expanding it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y.long[<span class="sc">-</span>tstlong, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ASReml Version 4.2 15/01/2024 18:02:35
+          LogLik        Sigma2     DF     wall
+ 1     -902.1607     0.8549988   1995   18:02:36
+ 2     -899.6476     0.8455182   1995   18:02:36
+ 3     -897.4152     0.8330925   1995   18:02:36
+ 4     -896.5900     0.8236879   1995   18:02:36
+ 5     -896.4757     0.8190706   1995   18:02:36
+ 6     -896.4751     0.8187290   1995   18:02:36</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>blups <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>ASReml Version 4.2 15/01/2024 18:02:36
+          LogLik        Sigma2     DF     wall
+ 1     -896.4751     0.8187204   1995   18:02:36
+ 2     -896.4751     0.8187203   1995   18:02:37
+ 3     -896.4751     0.8187202   1995   18:02:37</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> wheat.Y.long[tstlong, <span class="st">"name"</span>], </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">env =</span> wheat.Y.long[tstlong, <span class="st">"env"</span>],</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> wheat.Y.long[tstlong, <span class="st">"y"</span>]</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_asreml, blups, <span class="at">by =</span> <span class="st">"name"</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.311257</code></pre>
+</div>
+</div>
+<p>Comparing both packages:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>comp2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">package =</span> <span class="fu">c</span>(<span class="st">"BGLR"</span>, <span class="st">"asreml"</span>), </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">varG =</span> <span class="fu">c</span>(fm2<span class="sc">$</span>ETA[[<span class="dv">1</span>]]<span class="sc">$</span>varU, <span class="fu">summary</span>(mod2)<span class="sc">$</span>varcomp[<span class="dv">1</span>, <span class="st">"component"</span>]),  </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">varE =</span> <span class="fu">c</span>(fm2<span class="sc">$</span>varE, <span class="fu">summary</span>(mod2)<span class="sc">$</span>varcomp[<span class="dv">2</span>, <span class="st">"component"</span>]),  </span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">c</span>(<span class="fu">cor</span>(pred_gblup_bglr<span class="sc">$</span>y, pred_gblup_bglr<span class="sc">$</span>yhat),</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)))</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>comp2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  package      varG      varE  accuracy
+1    BGLR 0.1736191 0.8177197 0.3111166
+2  asreml 0.1691422 0.8187290 0.3112570</code></pre>
+</div>
+</div>
+<p>The results are similar.</p>
+<div class="cell" data-fig.asp="1">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pred_met <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_bglr, pred_gblup_asreml, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"env"</span>))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred_met<span class="sc">$</span>yhat, pred_met<span class="sc">$</span>predicted.value, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"BGLR predictions"</span>, <span class="at">ylab =</span> <span class="st">"asreml predictions"</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">coef =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="576"></p>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>In both cases (single model and MET model), the <code>varG</code> differed a little bit among packages. I don’t know why is that, but if you know I would be happy to see the explanation. Apart from that, the results are very similar.</p>
+<p>I hope you enjoyed this comparison! Let me know if you have any comments or issues.</p>
+
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-jarquin2014" class="csl-entry" role="doc-biblioentry">
+Jarquín, Diego, José Crossa, Xavier Lacaze, Philippe Du Cheyron, Joëlle Daucourt, Josiane Lorgeou, François Piraux, et al. 2014. <span>“A Reaction Norm Model for Genomic Selection Using High-Dimensional Genomic and Environmental Data.”</span> <em>Theoretical and Applied Genetics</em> 127 (3): 595–607. <a href="https://doi.org/10.1007/s00122-013-2243-1">https://doi.org/10.1007/s00122-013-2243-1</a>.
+</div>
+<div id="ref-perez2014" class="csl-entry" role="doc-biblioentry">
+Pérez, Paulino, and Gustavo de los Campos. 2014. <span>“<span class="nocase">Genome-Wide Regression and Prediction with the BGLR Statistical Package</span>.”</span> <em>Genetics</em> 198 (2): 483–95. <a href="https://doi.org/10.1534/genetics.114.164442">https://doi.org/10.1534/genetics.114.164442</a>.
+</div>
+<div id="ref-asreml2023" class="csl-entry" role="doc-biblioentry">
+The VSNi Team. 2023. <em>Asreml: Fits Linear Mixed Models Using REML</em>. <a href="https://www.vsni.co.uk">www.vsni.co.uk</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See section “Selecting the default BLAS/LAPACK” of the tutorial <a href="https://csantill.github.io/RPerformanceWBLAS">Improving R Perfomance by installing optimized BLAS/LAPACK libraries</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">Blog made with <a href="https://quarto.org/">Quarto</a>, by Igor Kuivjogi Fernandes. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</div>   
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -5,8 +5,7 @@ about:
   template: trestles
 ---
 
-From the vibrant city of São Paulo in Brazil, I'm a Portuguese native speaker who now calls Arkansas home. I spent some time in the industry after high school before realizing my passion for statistics. This led me to pursue a Bachelor's degree in Statistics from the Federal University of Goiás, where I served as an undergraduate researcher at Embrapa Rice and Beans [^1]. We used agricultural data to explore how environmental factors impacted the yield of rice and beans. This experience stimulated my interest in agricultural statistics, prompting me to pursue a Master's degree in Statistics and Analytics from the University of Arkansas.   
+From the vibrant city of São Paulo in Brazil, I'm a Portuguese native speaker who now calls Arkansas home. I spent some time in the industry after high school before realizing my passion for statistics. This led me to pursue a Bachelor's degree in Statistics from the Federal University of Goiás, where I served as an undergraduate researcher at Embrapa Rice and Beans [^1]. We used agricultural data to explore how environmental factors impacted the yield of rice and beans. This experience stimulated my interest in agricultural statistics, prompting me to pursue a Master's degree in Statistics and Analytics from the University of Arkansas.\
 Started with C, then added R and Python to my toolkit. I've also used SQL in the past.
 
 [^1]: The Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.
-

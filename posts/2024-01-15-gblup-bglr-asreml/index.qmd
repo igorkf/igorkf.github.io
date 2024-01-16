@@ -1,0 +1,236 @@
+---
+title: "Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials"
+date: "2024-01-15"
+date-modified: last-modified
+categories: [R, GBLUP, BGLR, asreml]
+draft: false
+comments: false
+bibliography: references.bib
+image: images/wheat.jpg
+---
+
+# Introduction
+
+Mostly, I have been using the package `asreml` [@asreml2023] for fitting genomic prediction models. This year I started to read some papers about fitting GBLUP models. For example, I read the reaction norm paper [@jarquin2014] and the `BGLR` package paper [@perez2014]. I noticed both papers used the `BGLR` package, so I wondered if I could get similar results with `asreml`. This post is an attempt to compare results from `BGLR` and `asreml` packages when fitting GBLUP models in single and multi-environment trials (MET).
+
+# Dataset
+
+To compare both packages, we are going to use a MET dataset from the `BGLR` package, which comprises 599 historical CIMMYT wheat lines. The phenotypic trait is the average grain yield of these 599 wheat lines, evaluated in four environments. The trait was standardized to have null mean and unit variance.
+
+```{r}
+library(BGLR) 
+library(asreml)
+```
+
+# Single environment GBLUP
+
+The first case is fitting a GBLUP for a single environment (here we consider the first).
+
+```{r}
+data(wheat, package = "BGLR")
+# ?wheat  # to know more about it
+
+# phenotypes
+wheat.Y <- as.data.frame(wheat.Y)
+colnames(wheat.Y) <- paste0("y", 1:4) 
+rownames(wheat.Y) <- NULL 
+wheat.Y$name <- as.factor(1:nrow(wheat.Y))  # fake genotype names 
+y <- wheat.Y[, 1]  # get yield from first environment
+head(wheat.Y)
+```
+
+The columns `y1` to `y4` represent the yield of each environment. I used fake numbers (1 to 599) to name each genotype in the column `name`.
+
+```{r}
+# markers
+X <- wheat.X 
+n <- nrow(X) 
+p <- ncol(X)
+dim(X)
+```
+
+We have 599 individuals and 1279 markers.
+
+# Cross-validation (CV)
+
+We are going to evaluate the CV1 scheme (predicting unobserved genotypes), therefore 100 random genotypes will be hold as testing set. Remember, we are using the phenotypes from the first environment stored in `y`. In the `BGLR` package, we can mask the test set by setting the phenotypes to `NA`:
+
+```{r}
+yNA <- y 
+set.seed(123) 
+tst <- sample(1:n, size = 100, replace = F)
+yNA[tst] <- NA
+```
+
+The `tst` object holds integers that shows which rows are to be used as the testing set, and we are going to use them to calculate the test set accuracy. 
+
+# Computing G matrix
+
+I am computing the genomic relationship matrix as described in the BGLR paper [@perez2014, see Box 9]:
+
+```{r}
+X <- scale(X, center = T, scale = T)
+G <- (X %*% t(X)) / p  # same as tcrossprod(X) / p
+rownames(G) <- colnames(G) <- levels(wheat.Y$name)
+dim(G)
+G[1:5, 1:5]
+```
+
+# GBLUP in BGLR
+
+Fitting GBLUP in `BGLR` requires us to set a linear predictor (`ETA`).\
+In this case, we are using only one kernel, i.e., the covariance matrix `G`. If you want to check the iterations, set `verbose = T`.
+
+```{r, warning = F}
+ETA <- list(list(K = G, model = "RKHS")) 
+fm1 <- BGLR(y = yNA, ETA = ETA, nIter = 5000, burnIn = 1000, 
+            saveAt = "GBLUP_", verbose = F) 
+pred_gblup_bglr <- data.frame(
+  name = wheat.Y[tst, "name"],
+  y = y[tst], 
+  yhat = fm1$yHat[tst]
+) 
+cor(pred_gblup_bglr$y, pred_gblup_bglr$yhat)  # correlation between observed and predicted values
+```
+
+Note: if you get an LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK [^1].
+
+[^1]: See section "Selecting the default BLAS/LAPACK" of the tutorial [Improving R Perfomance by installing optimized BLAS/LAPACK libraries](https://csantill.github.io/RPerformanceWBLAS)
+
+# GBLUP in asreml
+
+Fitting GBLUP in `asreml` requires us to pass the covariance matrix `G` in the `vm` object. Now, we can just fit the model removing the testing samples with `wheat.Y[-tst, ]`.
+
+```{r, warning = F, message = F}
+mod1 <- asreml(y1 ~ 1, random = ~ vm(name, source = G, singG = "PSD"), 
+               data = wheat.Y[-tst, ]) 
+pred_gblup_asreml <- data.frame(
+  y = wheat.Y[tst, "y1"], 
+  predict(mod1, classify = "name")$pvals[tst, c("name", "predicted.value")]
+)
+cor(pred_gblup_asreml$y, pred_gblup_asreml$predicted.value)
+```
+
+Comparing both packages:
+
+```{r}
+comp1 <- data.frame(
+  package = c("BGLR", "asreml"), 
+  varG = c(fm1$ETA[[1]]$varU, summary(mod1)$varcomp[1, "component"]),  
+  varE = c(fm1$varE, summary(mod1)$varcomp[2, "component"]),  
+  accuracy = c(cor(pred_gblup_bglr$y, pred_gblup_bglr$yhat),
+               cor(pred_gblup_asreml$y, pred_gblup_asreml$predicted.value)))
+comp1
+```
+
+where `varG` is the genetic variance, `varE` is the residual variance, and `accuracy` is the Pearson's correlation between observed and predicted values (considering only the test set). The results are similar.
+
+```{r, fig.asp = 1, fig.width = 6}
+pred <- merge(pred_gblup_bglr, pred_gblup_asreml, by = "name")
+plot(pred$yhat, pred$predicted.value, 
+     xlab = "BGLR predictions", ylab = "asreml predictions")
+abline(coef = c(0, 1), col = "blue", lty = 2)
+```
+
+# MET GBLUP
+
+Now let's consider when we have more than one environment. This data has four.
+
+We reshape the data from wide (four environments, one column per environment) to long (one column for all environments stacked).
+
+```{r}
+wheat.Y.long <- reshape(wheat.Y, direction = "long", varying = 1:4, 
+                        timevar = "env", sep = "")
+wheat.Y.long$id <- NULL 
+rownames(wheat.Y.long) <- NULL 
+wheat.Y.long$env <- as.factor(wheat.Y.long$env) 
+dim(wheat.Y.long)
+head(wheat.Y.long)
+tail(wheat.Y.long)
+```
+
+Remember, `name` are the genotypes, and `env` are the environments.
+
+Now we mask again, but now the response is in the long format. We will search for the rows where the genotypes were in the test set in the previous example.
+
+```{r}
+ylong <- wheat.Y.long[, "y"] 
+ylongNA <- ylong 
+set.seed(123)
+tstlong <- as.integer(
+  rownames(wheat.Y.long[wheat.Y.long$name %in% wheat.Y[tst, "name"], ])
+) 
+ylongNA[tstlong] <- NA
+length(tstlong)
+```
+
+# MET BGLUP in BGLR
+
+As the genotypes are repeated across environments, we need to expand the covariance matrix `G` to account for the repetitions. To do this, we perform $Z G Z ^{'}$, where $Z$ is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, $G$ is the genetic relationship matrix, and $Z$ is the incidence matrix transposed, as explained in @jarquin2014.
+
+```{r}
+Z <- as.matrix(model.matrix(lm(y ~ name - 1, data = wheat.Y.long))) 
+ZGZt <- Z %*% G %*% t(Z) 
+dim(ZGZt)
+```
+
+Note that the $Z G Z^{'}$ matrix has dimension $n \times n$, i.e., it matches the dimension of repeated genotypes across environments. You can play with `Z` to see how it looks like.
+
+Now we pass the kernel $Z G Z^{'}$ (instead of $G$) in the linear predictor.
+
+```{r}
+ETA <- list(list(K = ZGZt, model = "RKHS")) 
+fm2 <- BGLR(y = ylongNA, ETA = ETA, nIter = 5000, burnIn = 1000, 
+            saveAt = "MET_BGLUP_", verbose = F)
+pred_gblup_bglr <- data.frame(
+  name = wheat.Y.long[tstlong, "name"],
+  env = wheat.Y.long[tstlong, "env"],
+  y = ylong[tstlong], 
+  yhat = fm2$yHat[tstlong]
+) 
+cor(pred_gblup_bglr$y, pred_gblup_bglr$yhat)
+```
+
+# MET GBLUP in asreml
+
+In `asreml` we can pass directly the $G$ matrix without expanding it.
+
+```{r, warning = F, message = F}
+mod2 <- asreml(y ~ 1, random = ~ vm(name, source = G, singG = "PSD"), 
+               data = wheat.Y.long[-tstlong, ]) 
+blups <- predict(mod2, classify = "name")$pvals[, c("name", "predicted.value")]
+pred_gblup_asreml <- data.frame(
+  name = wheat.Y.long[tstlong, "name"], 
+  env = wheat.Y.long[tstlong, "env"],
+  y = wheat.Y.long[tstlong, "y"]
+) 
+pred_gblup_asreml <- merge(pred_gblup_asreml, blups, by = "name")
+cor(pred_gblup_asreml$y, pred_gblup_asreml$predicted.value)
+```
+
+Comparing both packages:
+
+```{r}
+comp2 <- data.frame(
+  package = c("BGLR", "asreml"), 
+  varG = c(fm2$ETA[[1]]$varU, summary(mod2)$varcomp[1, "component"]),  
+  varE = c(fm2$varE, summary(mod2)$varcomp[2, "component"]),  
+  accuracy = c(cor(pred_gblup_bglr$y, pred_gblup_bglr$yhat),
+               cor(pred_gblup_asreml$y, pred_gblup_asreml$predicted.value)))
+comp2
+```
+
+The results are similar.
+
+```{r, fig.asp = 1, fig.width = 6}
+pred_met <- merge(pred_gblup_bglr, pred_gblup_asreml, by = c("name", "env"))
+plot(pred_met$yhat, pred_met$predicted.value, 
+     xlab = "BGLR predictions", ylab = "asreml predictions")
+abline(coef = c(0, 1), col = "blue", lty = 2)
+```
+
+# Conclusion
+
+In both cases (single model and MET model), the `varG` differed a little bit among packages. I don't know why is that, but if you know I would be happy to see the explanation. Apart from that, the results are very similar.
+
+I hope you enjoyed this comparison! Let me know if you have any comments or issues.
