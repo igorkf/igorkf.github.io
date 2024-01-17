@@ -255,7 +255,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 15, 2024</p>
+        <p class="date-modified">January 17, 2024</p>
       </div>
     </div>
       
@@ -286,7 +286,7 @@ cookieconsent.run({
 <pre><code>Carregando pacotes exigidos: Matrix</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Online License checked out Mon Jan 15 18:14:00 2024</code></pre>
+<pre><code>Online License checked out Wed Jan 17 11:02:37 2024</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading ASReml-R version 4.2</code></pre>
@@ -381,7 +381,7 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <pre><code>[1] 0.5601514</code></pre>
 </div>
 </div>
-<p>Note: if you get an LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>Note: if you get a LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 </section>
 <section id="gblup-in-asreml" class="level1">
 <h1>GBLUP in asreml</h1>
@@ -390,26 +390,26 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y1 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y[<span class="sc">-</span>tst, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 15/01/2024 18:14:08
+<pre><code>ASReml Version 4.2 17/01/2024 11:02:46
           LogLik        Sigma2     DF     wall
- 1     -232.3355     0.8552212    498   18:14:08
- 2     -224.1149     0.7898886    498   18:14:08
- 3     -214.8656     0.6987314    498   18:14:08
- 4     -209.2359     0.6131716    498   18:14:08
- 5     -207.4308     0.5509318    498   18:14:08
- 6     -207.3177     0.5335289    498   18:14:08
- 7     -207.3163     0.5315242    498   18:14:08</code></pre>
+ 1     -232.3355     0.8552212    498   11:02:47
+ 2     -224.1149     0.7898886    498   11:02:47
+ 3     -214.8656     0.6987314    498   11:02:47
+ 4     -209.2359     0.6131716    498   11:02:47
+ 5     -207.4308     0.5509318    498   11:02:47
+ 6     -207.3177     0.5335289    498   11:02:47
+ 7     -207.3163     0.5315242    498   11:02:47</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> wheat.Y[tst, <span class="st">"y1"</span>], </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(mod1, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[tst, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 15/01/2024 18:14:08
+<pre><code>ASReml Version 4.2 17/01/2024 11:02:47
           LogLik        Sigma2     DF     wall
- 1     -207.3163     0.5313973    498   18:14:09
- 2     -207.3163     0.5313950    498   18:14:09
- 3     -207.3163     0.5313899    498   18:14:09</code></pre>
+ 1     -207.3163     0.5313973    498   11:02:48
+ 2     -207.3163     0.5313950    498   11:02:48
+ 3     -207.3163     0.5313899    498   11:02:48</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -529,29 +529,29 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y.long[<span class="sc">-</span>tstlong, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 15/01/2024 18:14:54
+<pre><code>ASReml Version 4.2 17/01/2024 11:03:38
           LogLik        Sigma2     DF     wall
- 1     -902.1607     0.8549988   1995   18:14:54
- 2     -899.6476     0.8455182   1995   18:14:54
- 3     -897.4152     0.8330925   1995   18:14:55
- 4     -896.5900     0.8236879   1995   18:14:55
- 5     -896.4757     0.8190706   1995   18:14:55
- 6     -896.4751     0.8187290   1995   18:14:55</code></pre>
+ 1     -902.1607     0.8549988   1995   11:03:38
+ 2     -899.6476     0.8455182   1995   11:03:38
+ 3     -897.4152     0.8330925   1995   11:03:38
+ 4     -896.5900     0.8236879   1995   11:03:38
+ 5     -896.4757     0.8190706   1995   11:03:39
+ 6     -896.4751     0.8187290   1995   11:03:39</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>blups <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 15/01/2024 18:14:55
+<pre><code>ASReml Version 4.2 17/01/2024 11:03:39
           LogLik        Sigma2     DF     wall
- 1     -896.4751     0.8187204   1995   18:14:55
- 2     -896.4751     0.8187203   1995   18:14:55
- 3     -896.4751     0.8187202   1995   18:14:55</code></pre>
+ 1     -896.4751     0.8187204   1995   11:03:39
+ 2     -896.4751     0.8187203   1995   11:03:39
+ 3     -896.4751     0.8187202   1995   11:03:39</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> wheat.Y.long[tstlong, <span class="st">"name"</span>], </span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">env =</span> wheat.Y.long[tstlong, <span class="st">"env"</span>],</span>
 <span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> wheat.Y.long[tstlong, <span class="st">"y"</span>]</span>
 <span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_asreml, blups, <span class="at">by =</span> <span class="st">"name"</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_asreml, p, <span class="at">by =</span> <span class="st">"name"</span>)</span>
 <span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.311257</code></pre>

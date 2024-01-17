@@ -61,7 +61,7 @@ tst <- sample(1:n, size = 100, replace = F)
 yNA[tst] <- NA
 ```
 
-The `tst` object holds integers that shows which rows are to be used as the testing set, and we are going to use them to calculate the test set accuracy. 
+The `tst` object holds integers that shows which rows are to be used as the testing set, and we are going to use them to calculate the test set accuracy.
 
 # Computing G matrix
 
@@ -92,7 +92,7 @@ pred_gblup_bglr <- data.frame(
 cor(pred_gblup_bglr$y, pred_gblup_bglr$yhat)  # correlation between observed and predicted values
 ```
 
-Note: if you get an LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK [^1].
+Note: if you get a LAPACK error in Ubuntu, for example, try changing the defaults of BLAS and LAPACK [^1].
 
 [^1]: See section "Selecting the default BLAS/LAPACK" of the tutorial [Improving R Perfomance by installing optimized BLAS/LAPACK libraries](https://csantill.github.io/RPerformanceWBLAS)
 
@@ -197,13 +197,13 @@ In `asreml` we can pass directly the $G$ matrix without expanding it.
 ```{r, warning = F, message = F}
 mod2 <- asreml(y ~ 1, random = ~ vm(name, source = G, singG = "PSD"), 
                data = wheat.Y.long[-tstlong, ]) 
-blups <- predict(mod2, classify = "name")$pvals[, c("name", "predicted.value")]
+p <- predict(mod2, classify = "name")$pvals[, c("name", "predicted.value")]
 pred_gblup_asreml <- data.frame(
   name = wheat.Y.long[tstlong, "name"], 
   env = wheat.Y.long[tstlong, "env"],
   y = wheat.Y.long[tstlong, "y"]
 ) 
-pred_gblup_asreml <- merge(pred_gblup_asreml, blups, by = "name")
+pred_gblup_asreml <- merge(pred_gblup_asreml, p, by = "name")
 cor(pred_gblup_asreml$y, pred_gblup_asreml$predicted.value)
 ```
 
@@ -237,4 +237,3 @@ I hope you enjoyed this comparison! Let me know if you have any comments or issu
 ```{r}
 sessionInfo()
 ```
-
