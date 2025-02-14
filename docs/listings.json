@@ -2,12 +2,14 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/2025-02-13-center-scale/index.html",
       "/posts/2024-01-15-gblup-bglr-asreml/index.html"
     ]
   },
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/2025-02-13-center-scale/index.html",
       "/posts/2024-01-15-gblup-bglr-asreml/index.html"
     ]
   }

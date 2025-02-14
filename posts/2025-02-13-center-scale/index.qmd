@@ -1,0 +1,47 @@
+---
+title: "Analyzing the parameters of a linear model under the centering and scaling of the response variable"
+date: "2025-02-13"
+date-modified: last-modified
+categories: [linear-model, regression]
+draft: false
+# bibliography: references.bib
+image: images/transformation.jpg
+---
+
+People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.
+
+Define the following linear model for $y$, with two covariates $x_1$ and $x_2$: $$
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+$$ with $E[\varepsilon] = 0$ and $Var[\varepsilon] = \sigma^2$.
+
+Now, define a transformation of the response variable, by centering by $a$ and scaling by $b$: $$
+y' = \frac{y - a}{b}
+$$ with $a$ and $b$ known constants.
+
+The same model form holds for $y'$:
+$$
+y' = \beta_0' + \beta_1' x_1 + \beta_2' x_2
+$$ 
+
+Realizing that $y = y'b + a$, we can substitute it in the first model: 
+
+$$
+y'b + a = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon \implies
+y' = \frac{\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon - a}{b}
+$$ 
+
+Rearranging the terms, we can identify what has changed:
+$$
+\begin{align*}
+y' &= \underbrace{\frac{\beta_0 - a}{b}}_{\beta_0'} + \underbrace{\frac{1}{b} \beta_1}_{\beta_1'} x_1 + \underbrace{\frac{1}{b} \beta_2}_{\beta_2'} x_2 + \underbrace{\frac{1}{b} \varepsilon}_{\varepsilon'} \\
+&= \beta_0' + \beta_1' x_1 + \beta_2' x_2 + \varepsilon'
+\end{align*}
+$$
+
+Thus, regarding the original model, $\beta_0$ (the intercept) was centered by $a$ and scaled by $b$, whereas $\beta_1$ and $\beta_2$ were scaled by $b$. We can also identify how the variance of the error term has changed:
+$$
+Var[\varepsilon'] = Var\Big[\frac{1}{b} \varepsilon\Big] = \frac{1}{b^2} Var[\varepsilon] = \frac{1}{b^2} \sigma^2 = \sigma'^{ \ 2}
+$$
+So, the variance of the error was scaled by the square of $b$.   
+
+This idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise.

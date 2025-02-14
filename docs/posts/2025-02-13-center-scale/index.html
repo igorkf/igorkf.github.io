@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2025-02-13">
 
-<title>Publications – Igor Kuivjogi Fernandes</title>
+<title>Analyzing the parameters of a linear model under the centering and scaling of the response variable – Igor Kuivjogi Fernandes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,46 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,20 +97,51 @@ cookieconsent.run({
 </script> 
   
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Publications – Igor Kuivjogi Fernandes">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="Analyzing the parameters of a linear model under the centering and scaling of the response variable – Igor Kuivjogi Fernandes">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://igorkf.github.io/posts/2025-02-13-center-scale/images/transformation.jpg">
 <meta property="og:site_name" content="Igor Kuivjogi Fernandes">
 </head>
 
 <body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Igor Kuivjogi Fernandes</span>
     </a>
   </div>
@@ -139,15 +152,15 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./posts/index.html"> 
+    <a class="nav-link" href="../../posts/index.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./publications.html" aria-current="page"> 
+    <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -173,41 +186,78 @@ cookieconsent.run({
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Analyzing the parameters of a linear model under the centering and scaling of the response variable</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">linear-model</div>
+                <div class="quarto-category">regression</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 13, 2025</p>
+      </div>
+    </div>
+    
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">February 13, 2025</p>
+      </div>
+    </div>
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Publications</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header> 
-      <div class="about-contents"><main class="content" id="quarto-document-content">
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-https://doi.org/10.1002/agj2.21481" class="csl-entry" role="listitem">
-Costa-Neto, G., Matta, D. H. da, Fernandes, I. K., Stone, L. F., &amp; Heinemann, A. B. (2023). Environmental clusters defining breeding zones for tropical irrigated rice in brazil. <em>Agronomy Journal</em>. <a href="https://doi.org/10.1002/agj2.21481">https://doi.org/10.1002/agj2.21481</a>
-</div>
-<div id="ref-heinemann2022" class="csl-entry" role="listitem">
-Heinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., &amp; Fernandes, I. K. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in brazil. <em>Field Crops Research</em>, <em>286</em>, 108628. <a href="https://doi.org/10.1016/j.fcr.2022.108628">https://doi.org/10.1016/j.fcr.2022.108628</a>
-</div>
-</div>
-<!-- ::: {style="text-align: justify"} -->
-<!-- ### 2022 -->
-<!-- -   Heinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & **Fernandes, I. K**. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in Brazil. *Field Crops Research*.<a href="https://doi.org/10.1016/j.fcr.2022.108628"><i class="bi bi-link btn-lg"></i></a> -->
-<!-- ::: -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-</main></div>
-    </div>
-  </div>
-</div>
- <!-- /main -->
+
+
+
+<p>People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.</p>
+<p>Define the following linear model for <span class="math inline">\(y\)</span>, with two covariates <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>: <span class="math display">\[
+y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+\]</span> with <span class="math inline">\(E[\varepsilon] = 0\)</span> and <span class="math inline">\(Var[\varepsilon] = \sigma^2\)</span>.</p>
+<p>Now, define a transformation of the response variable, by centering by <span class="math inline">\(a\)</span> and scaling by <span class="math inline">\(b\)</span>: <span class="math display">\[
+y' = \frac{y - a}{b}
+\]</span> with <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> known constants.</p>
+<p>The same model form holds for <span class="math inline">\(y'\)</span>: <span class="math display">\[
+y' = \beta_0' + \beta_1' x_1 + \beta_2' x_2
+\]</span></p>
+<p>Realizing that <span class="math inline">\(y = y'b + a\)</span>, we can substitute it in the first model:</p>
+<p><span class="math display">\[
+y'b + a = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon \implies
+y' = \frac{\beta_0 + \beta_1 x_1 + \beta_2 x_2 + \varepsilon - a}{b}
+\]</span></p>
+<p>Rearranging the terms, we can identify what has changed: <span class="math display">\[
+\begin{align*}
+y' &amp;= \underbrace{\frac{\beta_0 - a}{b}}_{\beta_0'} + \underbrace{\frac{1}{b} \beta_1}_{\beta_1'} x_1 + \underbrace{\frac{1}{b} \beta_2}_{\beta_2'} x_2 + \underbrace{\frac{1}{b} \varepsilon}_{\varepsilon'} \\
+&amp;= \beta_0' + \beta_1' x_1 + \beta_2' x_2 + \varepsilon'
+\end{align*}
+\]</span></p>
+<p>Thus, regarding the original model, <span class="math inline">\(\beta_0\)</span> (the intercept) was centered by <span class="math inline">\(a\)</span> and scaled by <span class="math inline">\(b\)</span>, whereas <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> were scaled by <span class="math inline">\(b\)</span>. We can also identify how the variance of the error term has changed: <span class="math display">\[
+Var[\varepsilon'] = Var\Big[\frac{1}{b} \varepsilon\Big] = \frac{1}{b^2} Var[\varepsilon] = \frac{1}{b^2} \sigma^2 = \sigma'^{ \ 2}
+\]</span> So, the variance of the error was scaled by the square of <span class="math inline">\(b\)</span>.</p>
+<p>This idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise.</p>
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -228,6 +278,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -621,6 +678,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="igorkf/igorkf.github.io" data-repo-id="R_kgDOJLX0KA" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

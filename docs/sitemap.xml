@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://igorkf.github.io/publications.html</loc>
-    <lastmod>2024-01-21T01:00:05.522Z</lastmod>
+    <lastmod>2024-01-16T10:08:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://igorkf.github.io/posts/2025-02-13-center-scale/index.html</loc>
+    <lastmod>2025-02-14T04:58:55.461Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/index.html</loc>
-    <lastmod>2024-01-21T04:07:08.602Z</lastmod>
-  </url>
-  <url>
-    <loc>https://igorkf.github.io/posts/index.html</loc>
-    <lastmod>2024-01-21T01:00:06.278Z</lastmod>
-  </url>
-  <url>
-    <loc>https://igorkf.github.io/posts/2024-01-15-gblup-bglr-asreml/index.html</loc>
-    <lastmod>2024-01-21T01:05:44.803Z</lastmod>
+    <lastmod>2025-02-14T05:02:40.024Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/about.html</loc>
-    <lastmod>2024-01-21T01:00:09.282Z</lastmod>
+    <lastmod>2023-03-21T02:04:20.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://igorkf.github.io/posts/2024-01-15-gblup-bglr-asreml/index.html</loc>
+    <lastmod>2024-01-17T21:02:20.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://igorkf.github.io/posts/index.html</loc>
+    <lastmod>2025-02-14T04:31:51.487Z</lastmod>
   </url>
 </urlset>

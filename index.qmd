@@ -13,7 +13,7 @@ page-layout: full
 title-block-banner: true
 ---
 
-Hey there! I'm Igor Kuivjogi Fernandes, a Graduate Research Assistant working at the University of Arkansas's Center for Agricultural Data Analytics (CADA) lab, under the supervision of Dr. Samuel Fernandes. My blog is a place where I share my thoughts and research papers with the world. Hope you enjoy reading them!
+My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas's Center for Agricultural Data Analytics (CADA).
 
 ## Recent posts
 
@@ -24,6 +24,6 @@ Hey there! I'm Igor Kuivjogi Fernandes, a Graduate Research Assistant working at
 
 ## Education
 
--   **2023-present**: MSc in Statistics and Analytics, University of Arkansas, U.S.
+-   **2023-2024**: MSc in Statistics and Analytics, University of Arkansas, U.S.
 
 -   **2017-2022**: BSc in Statistics, Federal University of Goiás, Brazil
