@@ -1,17 +1,17 @@
 [
   {
-    "objectID": "publications.html",
-    "href": "publications.html",
-    "title": "Publications",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Costa-Neto, G., Matta, D. H. da, Fernandes, I. K., Stone, L. F., & Heinemann, A. B. (2023). Environmental clusters defining breeding zones for tropical irrigated rice in brazil. Agronomy Journal. https://doi.org/10.1002/agj2.21481\n\n\nHeinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & Fernandes, I. K. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in brazil. Field Crops Research, 286, 108628. https://doi.org/10.1016/j.fcr.2022.108628"
+    "text": "From the vibrant city of São Paulo in Brazil, I’m a Portuguese native speaker who now calls Arkansas home. I spent some time in the industry after high school before realizing my passion for statistics. This led me to pursue a Bachelor’s degree in Statistics from the Federal University of Goiás, where I served as an undergraduate researcher at Embrapa Rice and Beans 1. We used agricultural data to explore how environmental factors impacted the yield of rice and beans. This experience stimulated my interest in agricultural statistics, prompting me to pursue a Master’s degree in Statistics and Analytics from the University of Arkansas.\nStarted with C, then added R and Python to my toolkit. I’ve also used SQL in the past."
   },
   {
-    "objectID": "posts/2025-02-13-center-scale/index.html",
-    "href": "posts/2025-02-13-center-scale/index.html",
-    "title": "Analyzing the parameters of a linear model under the centering and scaling of the response variable",
-    "section": "",
-    "text": "People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.\nDefine the following linear model for \\(y\\), with two covariates \\(x_1\\) and \\(x_2\\): \\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon\n\\] with \\(E[\\varepsilon] = 0\\) and \\(Var[\\varepsilon] = \\sigma^2\\).\nNow, define a transformation of the response variable, by centering by \\(a\\) and scaling by \\(b\\): \\[\ny' = \\frac{y - a}{b}\n\\] with \\(a\\) and \\(b\\) known constants.\nThe same model form holds for \\(y'\\): \\[\ny' = \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2\n\\]\nRealizing that \\(y = y'b + a\\), we can substitute it in the first model:\n\\[\ny'b + a = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon \\implies\ny' = \\frac{\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon - a}{b}\n\\]\nRearranging the terms, we can identify what has changed: \\[\n\\begin{align*}\ny' &= \\underbrace{\\frac{\\beta_0 - a}{b}}_{\\beta_0'} + \\underbrace{\\frac{1}{b} \\beta_1}_{\\beta_1'} x_1 + \\underbrace{\\frac{1}{b} \\beta_2}_{\\beta_2'} x_2 + \\underbrace{\\frac{1}{b} \\varepsilon}_{\\varepsilon'} \\\\\n&= \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\end{align*}\n\\]\nThus, regarding the original model, \\(\\beta_0\\) (the intercept) was centered by \\(a\\) and scaled by \\(b\\), whereas \\(\\beta_1\\) and \\(\\beta_2\\) were scaled by \\(b\\). We can also identify how the variance of the error term has changed: \\[\nVar[\\varepsilon'] = Var\\Big[\\frac{1}{b} \\varepsilon\\Big] = \\frac{1}{b^2} Var[\\varepsilon] = \\frac{1}{b^2} \\sigma^2 = \\sigma'^{ \\ 2}\n\\] So, the variance of the error was scaled by the square of \\(b\\).\nThis idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise."
+    "objectID": "about.html#footnotes",
+    "href": "about.html#footnotes",
+    "title": "About",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nThe Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.↩︎"
   },
   {
     "objectID": "index.html",
@@ -35,18 +35,11 @@
     "text": "Education\n\n2023-2024: MSc in Statistics and Analytics, University of Arkansas, U.S.\n2017-2022: BSc in Statistics, Federal University of Goiás, Brazil"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "Posts",
     "section": "",
-    "text": "From the vibrant city of São Paulo in Brazil, I’m a Portuguese native speaker who now calls Arkansas home. I spent some time in the industry after high school before realizing my passion for statistics. This led me to pursue a Bachelor’s degree in Statistics from the Federal University of Goiás, where I served as an undergraduate researcher at Embrapa Rice and Beans 1. We used agricultural data to explore how environmental factors impacted the yield of rice and beans. This experience stimulated my interest in agricultural statistics, prompting me to pursue a Master’s degree in Statistics and Analytics from the University of Arkansas.\nStarted with C, then added R and Python to my toolkit. I’ve also used SQL in the past."
-  },
-  {
-    "objectID": "about.html#footnotes",
-    "href": "about.html#footnotes",
-    "title": "About",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nThe Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.↩︎"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-01-15-gblup-bglr-asreml/index.html",
@@ -63,10 +56,17 @@
     "text": "Footnotes\n\n\nSee section “Selecting the default BLAS/LAPACK” of the tutorial Improving R Perfomance by installing optimized BLAS/LAPACK libraries↩︎"
   },
   {
-    "objectID": "posts/index.html",
-    "href": "posts/index.html",
-    "title": "Posts",
+    "objectID": "posts/2025-02-13-center-scale/index.html",
+    "href": "posts/2025-02-13-center-scale/index.html",
+    "title": "Analyzing the parameters of a linear model under the centering and scaling of the response variable",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.\nDefine the following linear model for \\(y\\), with two covariates \\(x_1\\) and \\(x_2\\): \\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon\n\\] with \\(E[\\varepsilon] = 0\\) and \\(Var[\\varepsilon] = \\sigma^2\\).\nNow, define a transformation of the response variable, by centering by \\(a\\) and scaling by \\(b\\): \\[\ny' = \\frac{y - a}{b}\n\\] with \\(a\\) and \\(b\\) known constants.\nThe same model form holds for \\(y'\\): \\[\ny' = \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\]\nRealizing that \\(y = y'b + a\\), we can substitute it in the first model:\n\\[\ny'b + a = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon \\implies\ny' = \\frac{\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon - a}{b}\n\\]\nRearranging the terms, we can identify what has changed: \\[\n\\begin{align*}\ny' &= \\underbrace{\\frac{\\beta_0 - a}{b}}_{\\beta_0'} + \\underbrace{\\frac{1}{b} \\beta_1}_{\\beta_1'} x_1 + \\underbrace{\\frac{1}{b} \\beta_2}_{\\beta_2'} x_2 + \\underbrace{\\frac{1}{b} \\varepsilon}_{\\varepsilon'} \\\\\n&= \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\end{align*}\n\\]\nThus, regarding the original model, \\(\\beta_0\\) (the intercept) was centered by \\(a\\) and scaled by \\(b\\), whereas \\(\\beta_1\\) and \\(\\beta_2\\) were scaled by \\(b\\). We can also identify how the variance of the error term has changed: \\[\nVar[\\varepsilon'] = Var\\Big[\\frac{1}{b} \\varepsilon\\Big] = \\frac{1}{b^2} Var[\\varepsilon] = \\frac{1}{b^2} \\sigma^2 = \\sigma'^{ \\ 2}\n\\] So, the variance of the error was scaled by the square of \\(b\\).\nThis idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise."
+  },
+  {
+    "objectID": "publications.html",
+    "href": "publications.html",
+    "title": "Publications",
+    "section": "",
+    "text": "Costa-Neto, G., Matta, D. H. da, Fernandes, I. K., Stone, L. F., & Heinemann, A. B. (2023). Environmental clusters defining breeding zones for tropical irrigated rice in brazil. Agronomy Journal. https://doi.org/10.1002/agj2.21481\n\n\nHeinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & Fernandes, I. K. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in brazil. Field Crops Research, 286, 108628. https://doi.org/10.1016/j.fcr.2022.108628"
   }
 ]
