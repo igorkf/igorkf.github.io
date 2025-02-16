@@ -13,7 +13,7 @@ page-layout: full
 title-block-banner: true
 ---
 
-My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas's Center for Agricultural Data Analytics (CADA).
+My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas, at the Center for Agricultural Data Analytics (CADA).
 
 ## Recent posts
 
@@ -24,6 +24,6 @@ My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the Uni
 
 ## Education
 
--   **2023-2024**: MSc in Statistics and Analytics, University of Arkansas, U.S.
+-   **2023-2024**: MSc in Statistics and Analytics, University of Arkansas, United States
 
 -   **2017-2022**: BSc in Statistics, Federal University of Goiás, Brazil

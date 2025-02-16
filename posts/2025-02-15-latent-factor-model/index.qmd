@@ -1,0 +1,170 @@
+---
+title: "Latent Factor Model from scratch: theory and code of factor analysis"
+date: "2025-02-15"
+date-modified: last-modified
+categories: [multivariate-analysis, latent-variables, factor-analysis]
+draft: true
+# bibliography: references.bib
+# image: images/transformation.jpg
+---
+
+# Motivation
+
+We want to study the linear association between variables, but the number of variables $p$ is large compared to the number of observations $n$. The $p \times p$ correlation matrix is large and might not be feasible to estimate so many parameters with few observations. One idea to solve this is to assume that the linear correlation between variables exist because the variables are functions of a small group of unobserved variables known as *latent variables*. 
+
+# Mathematical notation
+
+Consider we have $p$ variables represented by $X$, and all variables are standardized (centered by their mean, and scaled by their standard deviation), such that each variable has zero mean and unit variance:
+$$
+X = [x_1 \dots x_p]^T
+$$
+with mean vector $E[X] = \mu = [0 \dots 0]^T$ and dispersion matrix $D[X] = \Sigma$.   
+Due to the standardization of variables, the dispersion matrix has the following properties:
+
+i) Diagonal values (the variances) are one
+
+ii) Off-diagonal (the covariances) are $\sigma_{ij} = Corr[x_i, x_j]$ fol all $i \ne j$, because $Cov[x_i, x_j] = \frac{Cov[x_i, x_j]}{\sqrt{1} \sqrt{1}} = Corr[x_i, x_j]$
+
+Define a vector $f$ of random variables that we have not observed:
+$$
+f = [f_1 \dots f_k]^T
+$$
+with $k \ll n$ and $k \ll p$. By now, let's assume we know $k$.
+
+Now we can start relating $X$ with $f$. Each variable $x_i$ is related to $f$ as follows:
+$$
+\begin{align*}
+x_1 =& L_{11} f_1 + L_{12} f_2 + \dots + L_{1k} f_k + \varepsilon_1 \\
+x_2 =& L_{21} f_1 + L_{22} f_2 + \dots + L_{2k} f_k + \varepsilon_2 \\
+\vdots \\
+x_p =& L_{p1} f_1 + L_{p2} f_2 + \dots + L_{pk} f_k + \varepsilon_p
+\end{align*}
+$$
+
+where the coefficients multiplying each component of $f$ are fixed unknown parameters that need to be estimated, and $\varepsilon_1 \dots \varepsilon_p$ are random errors. They represent the parts of $x_1 \dots x_p$ that cannot be linearly explained by $f_1 \dots f_k$. As you can see, each variable is written as a linear combination of the factors plus a portion not explained by them.
+
+This system of equations can be represented in a matrix form as:
+$$
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_p
+\end{bmatrix} = \begin{bmatrix}
+L_{11} & L_{12} & \dots & L_{1k} \\
+L_{21} & L_{22} & \dots & L_{2k} \\
+\vdots & \vdots & \ddots & \vdots \\ 
+L_{p1} & L_{p2} & \dots & L_{pk}
+\end{bmatrix} 
+\begin{bmatrix}
+f_1 \\
+f_2 \\
+\vdots \\
+f_k
+\end{bmatrix}
+$$
+Finally, this can be written as:
+$$
+X = L f + \varepsilon
+$$
+where $X$ is a $p \times 1$ vector, $L$ is a $p \times k$ matrix, $f$ is a $k \times 1$ vector, and $\varepsilon$ is a $p \times 1$ vector. The $L$ matrix is known as the matrix of *factor loadings* and the $f$ vector is known as the *factor scores*. 
+
+Notice that all terms in the right-hand side of the equation are unknown, where $L$ is a matrix of fixed unknown parameters and $f$ and $\varepsilon$ are unknown random vectors. 
+
+Further assumptions for $f$ and $\varepsilon$ are:
+$$
+E[f] = [0 \dots 0]^T, \ D[f] = I_k
+$$
+Notice that $D[f] = I_k$ implies that the factors are uncorrelated as we want to explain the linear correlation of $X$ variables using a set of non-correlated latent factors, otherwise the interpretation would be confounded.
+
+$$
+E[\varepsilon] = [0 \dots 0]^T, \ D[f] = D = \begin{bmatrix}
+\sigma_1^2 & 0 & \dots & 0 \\
+0 & \sigma_2^2 & \dots & 0\\
+\vdots & \vdots & \ddots & \vdots \\ 
+0 & 0 & \dots & \sigma_p^2 \\
+\end{bmatrix}
+$$
+
+The last assumption is that $f$ and $\varepsilon$ are independent.
+
+# The dispersion matrix
+
+As stated in the beginning, we want to study the correlation between the variables, but instead of estimating it from the original $X$, we are going to use the equation we derived for $X$ that involves $L$ and $f$. This correlation will be denoted as $\Sigma$. From some properties of covariances and dispersion matrices:
+$$
+\begin{align*}
+\Sigma =& D[X] = D[Lf + \varepsilon] = Cov[Lf + \varepsilon, Lf + \varepsilon] \\
+=& \underbrace{Cov[Lf, Lf]}_{D[Lf]} + \underbrace{Cov[Lf, \varepsilon]}_0 + \underbrace{Cov[\varepsilon, Lf]}_0 + \underbrace{Cov[\varepsilon, \varepsilon]}_{D[\varepsilon]} \\
+=& D[Lf] + D[\varepsilon] = L D[f] L^T + D = L I_k L^T + D + LL^T + D
+\end{align*}
+$$
+
+Remember that each variable has zero mean and unit variance, so all diagonal values of $Sigma$ are one. It turns out there are some interesting results arising from the diagonal values of $\Sigma$. Let $\Sigma_{ii}$ represent the i-th diagonal value from $\Sigma$, so:
+$$
+\begin{align*}
+\Sigma_{ii} =& (LL^T + D)_{ii} = 1 \implies \\ 
+& (LL^T)_{ii} + \underbrace{D_{ii}}_{\sigma_i^2} = 1 \implies \\
+& (LL^T)_{ii} + \sigma_i^2 = 1
+\end{align*}
+$$
+Now, we can represent the i-th diagonal value from $LL^T$ as a dot product of $L$'s i-th row:
+$$
+(LL^T)_{ii} = [L_{i1} \ L_{i2} \dots L_{ik}] 
+\begin{bmatrix}
+L_{i1} \\
+L_{i2} \\
+\vdots \\
+L_{ik}
+\end{bmatrix}
+$$
+
+Plugging in into the result from before, we have:
+$$
+\begin{align*}
+\Sigma_{ii} =& [L_{i1} \ L_{i2} \dots L_{ik}] 
+\begin{bmatrix}
+L_{i1} \\
+L_{i2} \\
+\vdots \\
+L_{ik}
+\end{bmatrix} + \sigma_i^2 = 1 \implies \\
+& L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2 + \sigma_i^2 = 1 \implies \\
+\sigma_i^2 &= 1 - (L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2)
+\end{align*}
+$$
+
+This means that if we know how to estimate $L$, we don't need to estimate values of $D$. Arranging the result above, we have:
+$$
+\underbrace{\sigma_i^2}_{\text{non-negative}} + \ \underbrace{L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2}_{\text{non-negative}} = 1
+$$
+<!-- From above, two inequalities hold: -->
+<!-- $$ -->
+<!-- 0 \le \sigma_i^2 \le 1 \ \text{and} \ 0 \le L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2 \le 1 -->
+<!-- $$ -->
+
+As $\Sigma = D[X] = LL^T + D$, where the i-th diagonal of $\Sigma$ is $Var[x_i]$, we have that:
+$$
+Var[x_i] = 1 = \underbrace{L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2}_{\text{A}} + \underbrace{\sigma_i^2}_{\text{B}}
+$$
+
+where $\text{A}$ is the proportion of $Var[x_i]$ explained by the factors, also known as *communality* of $x_i$ and $\text{B}$ is the proportion of $Var[x_i]$ **not** explained by the factors, known as *specific variance* of $Var[x_i]$. Of course, this result holds for all the variances $Var[x_1], Var[X_2], \dots, Var[x_p]$. As [Dr. Peyam](https://www.youtube.com/@drpeyam) would say, "how cool is that?!". We can partition the variance of each variable in two parts. I think this is pretty cool.
+
+<!-- It can be shown that: -->
+<!-- i) for any $(i, j)$, $L_{ij}^2$ is the proportion of $Var[x_i]$ explained by the $j-th$ factor -->
+<!-- ii) for any $i$, the sum of squares of the i-th row of $L$ represent the proportion of $Var[x_i]$ explained by all factors together -->
+<!-- iii) for any $j$, the sum of squares of entries of j-th column of $L$ represent the total variability of all $p$ variables explained by the j-th factor -->
+
+# One important role of the loading matrix $L$
+
+There are many important roles of the loading matrix $L$, but let's focus in one particular useful result. One motivation for running this factor analysis is to study the correlation between the variables. Pick any two variables, e.g., the i-th and the j-th, with $i \neq j$. As defined previously:
+$$
+\begin{align*}
+x_i =& L_{i1} f_1 + L_{i2} f_2 + \dots + L_{ik} + \varepsilon_i \\
+x_j =& L_{j1} f_1 + L_{j2} f_2 + \dots + L_{jk} + \varepsilon_j
+\end{align*}
+$$
+
+The covariance between them is:
+$$
+
+$$
