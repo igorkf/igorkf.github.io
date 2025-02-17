@@ -14,8 +14,8 @@ website:
     background: "#DCDCDC"
     right:
       - posts/index.qmd
-      - publications.qmd
-      - about.qmd
+      # - publications.qmd
+      # - about.qmd
       - icon: github
         href: https://github.com/igorkf/
       - icon: linkedin
