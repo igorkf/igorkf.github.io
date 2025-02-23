@@ -1,0 +1,153 @@
+---
+title: "Whitening transformation: the trick to include variance-covariance structures in mixed models"
+date: "2025-02-20"
+date-modified: last-modified
+categories: [mixed-models, variance-covariance, whitening]
+draft: true
+# bibliography: references.bib
+# image: images/transformation.jpg
+---
+
+<!-- Linear mixed models (LMMs) are widely used in statistical modeling when data exhibit hierarchical or grouped structures. However, a limitation of the popular `lme4` package in R is that the user cannot include known variance-covariance structures for random effects. -->
+
+<!-- In this post, we introduce the whitening transformation, a mathematical trick that allows us to reparametrize random effects so that they follow a standard normal distribution with an identity covariance matrix. This transformation enables the inclusion of custom covariance structures in LMMs. -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ## Linear Mixed Model Formulation -->
+
+<!-- A standard linear mixed model can be written as: -->
+
+<!-- $$ -->
+<!-- y = X\beta + Z u + e -->
+<!-- $$ -->
+
+<!-- where $y$ is the response vector, $X$ is the fixed-effects design matrix, with coefficients $\beta$, $Z$ is the random-effects design matrix, with random effects $u \sim N(0, \sigma_u^2 K)$, $e \sim N(0, \sigma_e^2 I)$ is the residual error, $K$ is a user-defined covariance matrix representing relationships among observations. -->
+
+<!-- However, standard `lme4` assumes $K = I$, meaning it does not allow user-defined covariance structures. To bypass this limitation, we can apply the whitening transformation. -->
+
+
+<!-- ## The Whitening Transformation -->
+
+<!-- To make estimation easier, we transform the random effects: -->
+
+<!-- $$ -->
+<!-- u^* = T^{-1} u -->
+<!-- $$ -->
+
+<!-- where $T$ is a factorization of $K$, chosen so that: -->
+
+<!-- $$ -->
+<!-- \text{Var}(u^*) = T^{-1} \text{Var}(u) (T^{-1})' -->
+<!-- $$ -->
+
+<!-- Since $\text{Var}(u) = \sigma\_u\^2 K$, we get: -->
+
+<!-- $$ -->
+<!-- \text{Var}(u^*) = \sigma_u^2 T^{-1} K (T^{-1})' -->
+<!-- $$ -->
+
+<!-- If we choose $T$ such that $T T' = K$, then: -->
+
+<!-- $$ -->
+<!-- \text{Var}(u^*) = \sigma_u^2 I -->
+<!-- $$ -->
+
+<!-- Thus, the transformed random effects $u^* \sim N(0, I)$ now have an identity covariance matrix, allowing us to fit the model using standard LMM tools. -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ## Methods to Compute $T$ -->
+
+<!-- Two common factorizations of $K$ achieve this transformation: -->
+
+<!-- ### 1 Cholesky Decomposition -->
+
+<!-- If $K$ is positive definite, we use the Cholesky decomposition: -->
+
+<!-- $$ -->
+<!-- K = L L' -->
+<!-- $$ -->
+
+<!-- where \$L \) is a lower triangular matrix. We transform \$u \) as: -->
+
+<!-- $$ -->
+<!-- u^* = L^{-1} u -->
+<!-- $$ -->
+
+<!-- which ensures: -->
+
+<!-- $$ -->
+<!-- \text{Var}(u^*) = L^{-1} K (L^{-1})' = I -->
+<!-- $$ -->
+
+<!-- Advantages of Cholesky Decomposition:\ -->
+<!-- - Fast computation ($O(n\^3)$).\ -->
+<!-- - Numerically stable.\ -->
+<!-- - Memory-efficient (stores only a triangular matrix). -->
+
+<!-- Disadvantages:\ -->
+<!-- - Requires $K$ to be positive definite.\ -->
+<!-- - Fails if $K$ has small or zero eigenvalues. -->
+
+<!-- ------------------------------------------------------------------------ -->
+
+<!-- ### 2 Eigenvalue Decomposition (EVD) -->
+
+<!-- If $K$ is positive semi-definite, we use eigenvalue decomposition: -->
+
+<!-- $$ -->
+<!-- K = \Gamma \Lambda \Gamma' -->
+<!-- $$ -->
+
+<!-- where:   -->
+<!-- - \$\Gamma \) is the matrix of eigenvectors.   -->
+<!-- - \$\Lambda \) is the diagonal matrix of eigenvalues.   -->
+
+<!-- We transform \$u \) as: -->
+
+<!-- $$ -->
+<!-- u^* = \Lambda^{-1/2} \Gamma' u -->
+<!-- $$ -->
+
+<!-- which ensures: -->
+
+<!-- $$ -->
+<!-- \text{Var}(u^*) = \Lambda^{-1/2} \Gamma' K \Gamma \Lambda^{-1/2} = I -->
+<!-- $$ -->
+
+<!-- Advantages of Eigenvalue Decomposition:   -->
+<!-- - Works for singular or nearly singular \$K \).   -->
+<!-- - Provides insights into principal components of variation.   -->
+
+<!-- Disadvantages:   -->
+<!-- - Slower computation (\$O(n^3) \)).   -->
+<!-- - Requires handling small or zero eigenvalues carefully.   -->
+<!-- - Higher memory usage.   -->
+
+<!-- --- -->
+
+<!-- ## Implications for Mixed Models -->
+<!-- By transforming the random effects using whitening, we can now fit the model in a standard LMM framework: -->
+
+<!-- $$ -->
+<!-- y = X\beta + Z^* u^* + e -->
+<!-- $$ -->
+
+<!-- where: -->
+
+<!-- $$ -->
+<!-- Z^* = Z T -->
+<!-- $$ -->
+
+<!-- Since \$u^* \sim N(0, I) \), this model can be estimated using `lme4` without modification. -->
+
+<!-- This trick is widely used in: -->
+<!-- - Genomic prediction (e.g., kinship-based random effects). -->
+<!-- - Spatial statistics (e.g., correlated location-based effects). -->
+<!-- - Longitudinal models (e.g., structured temporal random effects). -->
+
+<!-- --- -->
+
+<!-- ## Conclusion -->
+<!-- The whitening transformation is a powerful technique that allows user-defined variance-covariance structures in mixed models. By transforming the random effects to follow a standard normal distribution, we can leverage existing mixed modeling tools like `lme4`. -->

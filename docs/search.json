@@ -7,18 +7,32 @@
     "text": "Costa-Neto, G., Matta, D. H. da, Fernandes, I. K., Stone, L. F., & Heinemann, A. B. (2023). Environmental clusters defining breeding zones for tropical irrigated rice in brazil. Agronomy Journal. https://doi.org/10.1002/agj2.21481\n\n\nHeinemann, A. B., Costa-Neto, G., Fritsche-Neto, R., da Matta, D. H., & Fernandes, I. K. (2022). Enviromic prediction is useful to define the limits of climate adaptation: A case study of common bean in brazil. Field Crops Research, 286, 108628. https://doi.org/10.1016/j.fcr.2022.108628"
   },
   {
-    "objectID": "posts/2024-01-15-gblup-bglr-asreml/index.html",
-    "href": "posts/2024-01-15-gblup-bglr-asreml/index.html",
-    "title": "Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials",
+    "objectID": "posts/2025-02-13-center-scale/index.html",
+    "href": "posts/2025-02-13-center-scale/index.html",
+    "title": "Analyzing the parameters of a linear model under the centering and scaling of the response variable",
     "section": "",
-    "text": "Mostly, I have been using the package asreml (The VSNi Team 2023) for fitting genomic prediction models. This year I started to read some papers about fitting GBLUP models. For example, I read the reaction norm paper (Jarquín et al. 2014) and the BGLR package paper (Pérez and Campos 2014). I noticed both papers used the BGLR package, so I wondered if I could get similar results with asreml. This post is an attempt to compare results from BGLR and asreml packages when fitting GBLUP models in single and multi-environment trials (MET)."
+    "text": "People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.\nDefine the following linear model for \\(y\\), with two covariates \\(x_1\\) and \\(x_2\\): \\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon\n\\] with \\(E[\\varepsilon] = 0\\) and \\(Var[\\varepsilon] = \\sigma^2\\).\nNow, define a transformation of the response variable, by centering by \\(a\\) and scaling by \\(b\\): \\[\ny' = \\frac{y - a}{b}\n\\] with \\(a\\) and \\(b\\) known constants.\nThe same model form holds for \\(y'\\): \\[\ny' = \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\]\nRealizing that \\(y = y'b + a\\), we can substitute it in the first model:\n\\[\ny'b + a = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon \\implies\ny' = \\frac{\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon - a}{b}\n\\]\nRearranging the terms, we can identify what has changed: \\[\n\\begin{align*}\ny' &= \\underbrace{\\frac{\\beta_0 - a}{b}}_{\\beta_0'} + \\underbrace{\\frac{1}{b} \\beta_1}_{\\beta_1'} x_1 + \\underbrace{\\frac{1}{b} \\beta_2}_{\\beta_2'} x_2 + \\underbrace{\\frac{1}{b} \\varepsilon}_{\\varepsilon'} \\\\\n&= \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\end{align*}\n\\]\nThus, regarding the original model, \\(\\beta_0\\) (the intercept) was centered by \\(a\\) and scaled by \\(b\\), whereas \\(\\beta_1\\) and \\(\\beta_2\\) were scaled by \\(b\\). We can also identify how the variance of the error term has changed: \\[\nVar[\\varepsilon'] = Var\\Big[\\frac{1}{b} \\varepsilon\\Big] = \\frac{1}{b^2} Var[\\varepsilon] = \\frac{1}{b^2} \\sigma^2 = \\sigma'^{ \\ 2}\n\\] So, the variance of the error was scaled by the square of \\(b\\).\nThis idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise."
   },
   {
-    "objectID": "posts/2024-01-15-gblup-bglr-asreml/index.html#footnotes",
-    "href": "posts/2024-01-15-gblup-bglr-asreml/index.html#footnotes",
-    "title": "Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nSee section “Selecting the default BLAS/LAPACK” of the tutorial Improving R Perfomance by installing optimized BLAS/LAPACK libraries↩︎"
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Igor Kuivjogi Fernandes",
+    "section": "",
+    "text": "My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas, at the Center for Agricultural Data Analytics (CADA)."
+  },
+  {
+    "objectID": "index.html#recent-posts",
+    "href": "index.html#recent-posts",
+    "title": "Igor Kuivjogi Fernandes",
+    "section": "Recent posts",
+    "text": "Recent posts\n\n\n\n\n\n\n\n\n\n\nFactor analysis from scratch: theory and code\n\n\n14 min\n\n\n\n\n\n\nFeb 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n\n See all"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Igor Kuivjogi Fernandes",
+    "section": "Education",
+    "text": "Education\n\n2023-2024: MSc in Statistics and Analytics, University of Arkansas, United States\n2017-2022: BSc in Statistics, Federal University of Goiás, Brazil"
   },
   {
     "objectID": "about.html",
@@ -35,38 +49,38 @@
     "text": "Footnotes\n\n\nThe Brazilian Agricultural Research Corporation in charge of coordinating research and development of rice and beans, two crops that are extensively grown in Brazil.↩︎"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Igor Kuivjogi Fernandes",
+    "objectID": "posts/2024-01-15-gblup-bglr-asreml/index.html",
+    "href": "posts/2024-01-15-gblup-bglr-asreml/index.html",
+    "title": "Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials",
     "section": "",
-    "text": "My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas, at the Center for Agricultural Data Analytics (CADA)."
+    "text": "Mostly, I have been using the package asreml (The VSNi Team 2023) for fitting genomic prediction models. This year I started to read some papers about fitting GBLUP models. For example, I read the reaction norm paper (Jarquín et al. 2014) and the BGLR package paper (Pérez and Campos 2014). I noticed both papers used the BGLR package, so I wondered if I could get similar results with asreml. This post is an attempt to compare results from BGLR and asreml packages when fitting GBLUP models in single and multi-environment trials (MET)."
   },
   {
-    "objectID": "index.html#recent-posts",
-    "href": "index.html#recent-posts",
-    "title": "Igor Kuivjogi Fernandes",
-    "section": "Recent posts",
-    "text": "Recent posts\n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items\n\n\n See all"
+    "objectID": "posts/2024-01-15-gblup-bglr-asreml/index.html#footnotes",
+    "href": "posts/2024-01-15-gblup-bglr-asreml/index.html#footnotes",
+    "title": "Comparing BGLR and asreml to fit GBLUP models in single and multi-environment trials",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nSee section “Selecting the default BLAS/LAPACK” of the tutorial Improving R Perfomance by installing optimized BLAS/LAPACK libraries↩︎"
   },
   {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Igor Kuivjogi Fernandes",
-    "section": "Education",
-    "text": "Education\n\n2023-2024: MSc in Statistics and Analytics, University of Arkansas, United States\n2017-2022: BSc in Statistics, Federal University of Goiás, Brazil"
-  },
-  {
-    "objectID": "posts/2025-02-13-center-scale/index.html",
-    "href": "posts/2025-02-13-center-scale/index.html",
-    "title": "Analyzing the parameters of a linear model under the centering and scaling of the response variable",
+    "objectID": "posts/2025-02-15-latent-factor-model/index.html",
+    "href": "posts/2025-02-15-latent-factor-model/index.html",
+    "title": "Factor analysis from scratch: theory and code",
     "section": "",
-    "text": "People transform the response variable for various reasons. In this post, we are going to analyze what happens to the parameters of the linear model, that is, the regression coefficients, when the response variable is centered and scaled. We are also going to see what happens to the variance of the error term.\nDefine the following linear model for \\(y\\), with two covariates \\(x_1\\) and \\(x_2\\): \\[\ny = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon\n\\] with \\(E[\\varepsilon] = 0\\) and \\(Var[\\varepsilon] = \\sigma^2\\).\nNow, define a transformation of the response variable, by centering by \\(a\\) and scaling by \\(b\\): \\[\ny' = \\frac{y - a}{b}\n\\] with \\(a\\) and \\(b\\) known constants.\nThe same model form holds for \\(y'\\): \\[\ny' = \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\]\nRealizing that \\(y = y'b + a\\), we can substitute it in the first model:\n\\[\ny'b + a = \\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon \\implies\ny' = \\frac{\\beta_0 + \\beta_1 x_1 + \\beta_2 x_2 + \\varepsilon - a}{b}\n\\]\nRearranging the terms, we can identify what has changed: \\[\n\\begin{align*}\ny' &= \\underbrace{\\frac{\\beta_0 - a}{b}}_{\\beta_0'} + \\underbrace{\\frac{1}{b} \\beta_1}_{\\beta_1'} x_1 + \\underbrace{\\frac{1}{b} \\beta_2}_{\\beta_2'} x_2 + \\underbrace{\\frac{1}{b} \\varepsilon}_{\\varepsilon'} \\\\\n&= \\beta_0' + \\beta_1' x_1 + \\beta_2' x_2 + \\varepsilon'\n\\end{align*}\n\\]\nThus, regarding the original model, \\(\\beta_0\\) (the intercept) was centered by \\(a\\) and scaled by \\(b\\), whereas \\(\\beta_1\\) and \\(\\beta_2\\) were scaled by \\(b\\). We can also identify how the variance of the error term has changed: \\[\nVar[\\varepsilon'] = Var\\Big[\\frac{1}{b} \\varepsilon\\Big] = \\frac{1}{b^2} Var[\\varepsilon] = \\frac{1}{b^2} \\sigma^2 = \\sigma'^{ \\ 2}\n\\] So, the variance of the error was scaled by the square of \\(b\\).\nThis idea of this post was only to show the changes in the parameters of the original linear model under the centering and scaling of the response variable. The practical implications of transforming the response variable are beyond the scope of this post, but I think this was an interesting exercise."
+    "text": "In this post, I am going to derive some mathematical results of the latent factor model (a.k.a factor analysis) and then implement it from scratch, comparing it with a known implementation from the psych package. The idea here is not to run a full factor analysis and interpret the results, but rather to get to know better the math behind it.\nOne reason to run factor analysis is to study the linear association between variables. In factor analysis, we assume that this linear association may exist because the variables are functions of a small group of unobserved variables known as latent factors. Let’s derive this idea."
+  },
+  {
+    "objectID": "posts/2025-02-15-latent-factor-model/index.html#the-connection-between-pca-and-factor-analysis",
+    "href": "posts/2025-02-15-latent-factor-model/index.html#the-connection-between-pca-and-factor-analysis",
+    "title": "Factor analysis from scratch: theory and code",
+    "section": "The connection between PCA and factor analysis",
+    "text": "The connection between PCA and factor analysis\nAs mentioned, we are going to estimate \\(L\\) using a principal components solution. Remember that the principal components representation for \\(X\\), where \\(X\\) is written as a linear combination of the eigenvalues, is:\n\\[\nZ = A_k (X - \\mu) = A_k X\n\\] because \\(X\\) was standardized, with\n\\[\nA_k = \\begin{bmatrix}\nu_1^T \\\\\n\\vdots \\\\\nu_k^T\n\\end{bmatrix}\n\\]\nwhere \\(u_1^T, \\dots, u_k^T\\) are the eigenvectors associated with the \\(k\\) largest eigenvalues \\(\\lambda_{(1)}, \\dots, \\lambda_{(k)}\\) of \\(D[X] = \\Sigma\\). Also, the variance of each principal component is \\(\\lambda_{(i)}\\), and the principal components are uncorrelated, so:\n\\[\nD[Z] =\n\\begin{bmatrix}\n\\lambda_{(1)} & 0 & \\dots & 0 \\\\\n0 & \\lambda_{(2)} & \\dots & 0 \\\\\n\\vdots & \\vdots & \\ddots & \\vdots \\\\\n0 & 0 & \\dots & \\lambda_{(k)}\n\\end{bmatrix}\n\\]\nLet \\(X_R\\) represent the reconstruction of \\(X\\) after performing PCA with \\(k\\) components. It can be shown that this reconstruction is:\n\\[\nX_R = \\mu + A_K^T Z = A_k^T Z\n\\]\nSo, we can think of \\(X\\) as a reconstruction plus an error of reconstruction:\n\\[\n\\begin{align*}\nX &= X_R + Error \\\\\n&= A_k^T Z + Error \\\\\n\\end{align*}\n\\]\nThis form is very similar to the latent factor model we derived before:\n\\[\nX = L f + \\varepsilon\n\\]\nwhere \\(A_k^T\\) would be the analogous of \\(L\\) and \\(Z\\) the analogous of \\(f\\). However, \\(Z\\) cannot be used as \\(f\\) because although \\(E[f] = E[Z] = 0\\), their covariance matrices are different, that is, \\(D[f] = I_k \\neq D[Z]\\). To solve this, we can rescale \\(Z\\) using the eigenvalues. Denote this rescaled version of \\(Z\\) as \\(Z^*\\):\n\\[\nZ^* = \\begin{bmatrix}\nz_1 / \\sqrt{\\lambda_{(1)}} \\\\\n\\vdots \\\\\nz_k / \\sqrt{\\lambda_{(k)}} \\\\\n\\end{bmatrix}\n\\]\nWe still have \\(E[Z^*] = E[Z] = 0\\) and now, for every \\(i = 1, \\dots, k\\):\n\\[\nVar\\Big[\\frac{z_i}{\\sqrt{\\lambda_{(i)}}}\\Big] = \\frac{1}{(\\sqrt{\\lambda_{(i)}})^2} Var[z_i] = \\frac{\\lambda_{(i)}}{\\lambda_{(i)}} = 1\n\\]\nand, as \\(z_i\\) and \\(z_j\\) are uncorrelated, so is \\(z_i^* = z_i / \\lambda_{(i)}\\) and \\(z_j^* = z_j / \\lambda_{(j)}\\). Therefore, \\(D[Z^*] = I_k = D[f]\\). Thus, we have that \\(Z^*\\) and \\(f\\) share the same properties.\nComing back to \\(X\\) after performing PCA, we need to rearrange the equation until we move from \\(Z\\) to \\(Z^*\\):\n\\[\n\\begin{align*}\nX =& A_k^T Z + Error \\\\\n=& \\begin{bmatrix}\nu_1^T \\\\\n\\vdots \\\\\nu_k^T\n\\end{bmatrix}^T \\begin{bmatrix}\nz_1 \\\\\n\\vdots \\\\\nz_k\n\\end{bmatrix} + Error \\\\\n=& \\begin{bmatrix}\nu_1 \\dots u_k\n\\end{bmatrix} \\begin{bmatrix}\nz_1 \\\\\n\\vdots \\\\\nz_k\n\\end{bmatrix} + Error \\\\\n=& \\begin{bmatrix}\n\\sqrt{\\lambda_{(1)}} u_1 \\dots \\sqrt{\\lambda_{(k)}} u_k\n\\end{bmatrix} \\begin{bmatrix}\nz_1 / \\sqrt{\\lambda_{(1)}} \\\\\n\\vdots \\\\\nz_k / \\sqrt{\\lambda_{(k)}} \\\\\n\\end{bmatrix} + Error \\\\\n=& \\begin{bmatrix}\n\\sqrt{\\lambda_{(1)}} u_1 \\dots \\sqrt{\\lambda_{(k)}} u_k\n\\end{bmatrix} Z^* + Error\n\\end{align*}\n\\]\nMatch this result against the factor latent model \\(X = Lf + \\varepsilon\\). We can see that \\(Z^*\\) is playing the role of \\(f\\), in which \\(Z^*\\) and \\(f\\) have same the mean and covariance, and the vector pre-multiplying \\(Z^*\\) is playing the role of \\(L\\). Thus, the solution for \\(L\\) is:\n\\[\nL = \\begin{bmatrix}\n\\sqrt{\\lambda_{(1)}} u_1 \\dots \\sqrt{\\lambda_{(k)}} u_k\n\\end{bmatrix}\n\\]\nSo, to estimate \\(L\\) we need to compute eigenvalues and eigenvectors of the covariance matrix of \\(X\\), and then construct \\(L\\) using the square root of the \\(k\\) largest eigenvalues associated with their eigenvectors."
   },
   {
     "objectID": "posts/index.html",
     "href": "posts/index.html",
     "title": "Posts",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nFactor analysis from scratch: theory and code\n\n\n14 min\n\n\n\n\n\n\nFeb 23, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAnalyzing the parameters of a linear model under the centering and scaling of the response variable\n\n\n2 min\n\n\n\n\n\n\nFeb 13, 2025\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nComparing BGLR and asreml to fit GBLUP models in single and multi-environment trials\n\n\n7 min\n\n\n\n\n\n\nJan 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
