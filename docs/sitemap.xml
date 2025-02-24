@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://igorkf.github.io/publications.html</loc>
-    <lastmod>2024-01-16T10:08:00.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://igorkf.github.io/posts/2025-02-13-center-scale/index.html</loc>
-    <lastmod>2025-02-16T04:10:04.435Z</lastmod>
+    <loc>https://igorkf.github.io/about.html</loc>
+    <lastmod>2025-02-14T15:30:26.117Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/index.html</loc>
-    <lastmod>2025-02-15T17:18:56.176Z</lastmod>
-  </url>
-  <url>
-    <loc>https://igorkf.github.io/about.html</loc>
-    <lastmod>2023-03-21T02:04:20.000Z</lastmod>
+    <lastmod>2025-02-24T15:20:29.587Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/posts/2024-01-15-gblup-bglr-asreml/index.html</loc>
-    <lastmod>2024-01-17T21:02:20.000Z</lastmod>
+    <lastmod>2025-02-14T15:30:26.148Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/posts/2025-02-15-latent-factor-model/index.html</loc>
-    <lastmod>2025-02-23T20:27:27.777Z</lastmod>
+    <lastmod>2025-02-24T15:20:56.003Z</lastmod>
   </url>
   <url>
     <loc>https://igorkf.github.io/posts/index.html</loc>
-    <lastmod>2025-02-15T17:14:48.622Z</lastmod>
+    <lastmod>2025-02-14T15:30:26.150Z</lastmod>
+  </url>
+  <url>
+    <loc>https://igorkf.github.io/posts/2025-02-13-center-scale/index.html</loc>
+    <lastmod>2025-02-14T15:37:45.624Z</lastmod>
+  </url>
+  <url>
+    <loc>https://igorkf.github.io/publications.html</loc>
+    <lastmod>2025-02-14T15:30:26.153Z</lastmod>
   </url>
 </urlset>
