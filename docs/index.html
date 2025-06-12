@@ -81,7 +81,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-title','listing-description','listing-image','listing-date','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 3,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description"],
     };
 
@@ -217,12 +218,12 @@ window.Quarto = {
 
 
 
-<p>My name is Igor Kuivjogi Fernandes, and I work as a Program Associate at the University of Arkansas, at the Center for Agricultural Data Analytics (CADA).</p>
+<p>My name is Igor Kuivjogi Fernandes. I am currently working as a Senior Data Scientist at Bosch Brazil.</p>
 <section id="recent-posts" class="level2">
 <h2 class="anchored" data-anchor-id="recent-posts">Recent posts</h2>
 <div id="listing-posts" class="quarto-listing quarto-listing-container-grid">
 <div class="list grid quarto-listing-cols-3">
-<div class="g-col-1" data-index="0" data-categories="multivariate-analysis,latent-variables,factor-analysis" data-listing-date-sort="1740290400000" data-listing-file-modified-sort="1740342447777" data-listing-date-modified-sort="1740342447000" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763">
+<div class="g-col-1" data-index="0" data-categories="multivariate-analysis,latent-variables,factor-analysis" data-listing-date-sort="1740279600000" data-listing-file-modified-sort="1740342447777" data-listing-date-modified-sort="1740342447000" data-listing-reading-time-sort="14" data-listing-word-count-sort="2763">
 <a href="./posts/2025-02-15-latent-factor-model/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -247,7 +248,30 @@ Feb 23, 2025
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="1" data-categories="linear-model,regression" data-listing-date-sort="1739426400000" data-listing-file-modified-sort="1739679004435" data-listing-date-modified-sort="1739679004000" data-listing-reading-time-sort="2" data-listing-word-count-sort="315">
+<div class="g-col-1" data-index="1" data-categories="mixed-models,variance-covariance,whitening" data-listing-date-sort="1740020400000" data-listing-file-modified-sort="1740342649535" data-listing-date-modified-sort="1740342649000" data-listing-reading-time-sort="4" data-listing-word-count-sort="711">
+<a href="./posts/2025-02-20-whitening-transformation/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Whitening transformation: the trick to include variance-covariance structures in mixed models
+</h5>
+<div class="listing-reading-time card-text text-muted">
+4 min
+</div>
+<div class="card-text listing-description">
+
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Feb 20, 2025
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="2" data-categories="linear-model,regression" data-listing-date-sort="1739415600000" data-listing-file-modified-sort="1739679004435" data-listing-date-modified-sort="1739679004000" data-listing-reading-time-sort="2" data-listing-word-count-sort="315">
 <a href="./posts/2025-02-13-center-scale/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
@@ -272,11 +296,11 @@ Feb 13, 2025
 </div>
 </a>
 </div>
-<div class="g-col-1" data-index="2" data-categories="R,GBLUP,BGLR,asreml" data-listing-date-sort="1705298400000" data-listing-file-modified-sort="1705525340000" data-listing-date-modified-sort="1705525340000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1272">
+<div class="g-col-1" data-index="3" data-categories="R,GBLUP,BGLR,asreml" data-listing-date-sort="1705287600000" data-listing-file-modified-sort="1705525340000" data-listing-date-modified-sort="1705525340000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1272">
 <a href="./posts/2024-01-15-gblup-bglr-asreml/index.html" class="quarto-grid-link">
 <div class="quarto-grid-item card h-100 card-left">
 <p class="card-img-top">
-<img loading="lazy" src="./posts/2024-01-15-gblup-bglr-asreml/images/wheat.jpg" class="thumbnail-image card-img" style="height: 150px;">
+<img loading="lazy" data-src="./posts/2024-01-15-gblup-bglr-asreml/images/wheat.jpg" class="thumbnail-image card-img" style="height: 150px;">
 </p>
 <div class="card-body post-contents">
 <h5 class="no-anchor card-title listing-title">
@@ -301,6 +325,9 @@ Jan 15, 2024
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="posts-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div>
 <p><a href="../posts/index.html"> <button type="button" class="btn btn-primary float-end btn-sm">See all</button></a><br></p>
 </section>
