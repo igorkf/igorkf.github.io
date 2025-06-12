@@ -165,7 +165,7 @@ length(tstlong)
 
 # MET BGLUP in BGLR
 
-As the genotypes are repeated across environments, we need to expand the covariance matrix `G` to account for the repetitions. To do this, we perform $Z G Z ^{'}$, where $Z$ is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, $G$ is the genetic relationship matrix, and $Z$ is the incidence matrix transposed, as explained in @jarquin2014.
+As the genotypes are repeated across environments, we need to expand the covariance matrix `G` to account for the repetitions. To do this, we perform $Z G Z'$, where $Z$ is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, $G$ is the genetic relationship matrix, and $Z'$ is the incidence matrix transposed, as explained in @jarquin2014.
 
 ```{r}
 Z <- as.matrix(model.matrix(lm(y ~ name - 1, data = wheat.Y.long))) 
@@ -175,7 +175,7 @@ dim(ZGZt)
 
 Note that the $Z G Z^{'}$ matrix has dimension $n \times n$, i.e., it matches the dimension of repeated genotypes across environments. You can play with `Z` to see how it looks like.
 
-Now we pass the kernel $Z G Z^{'}$ (instead of $G$) in the linear predictor.
+Now we pass the kernel $Z G Z'$ (instead of $G$) in the linear predictor.
 
 ```{r}
 ETA <- list(list(K = ZGZt, model = "RKHS")) 

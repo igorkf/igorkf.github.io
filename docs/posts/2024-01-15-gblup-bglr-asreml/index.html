@@ -85,6 +85,7 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../favicon.png" rel="icon" type="image/png">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -259,7 +260,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">January 17, 2024</p>
+        <p class="date-modified">March 6, 2025</p>
       </div>
     </div>
       
@@ -288,10 +289,10 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BGLR) </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(asreml)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Carregando pacotes exigidos: Matrix</code></pre>
+<pre><code>Loading required package: Matrix</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Online License checked out Wed Jan 17 11:02:37 2024</code></pre>
+<pre><code>Online License checked out Thu Mar  6 10:39:49 2025</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading ASReml-R version 4.2</code></pre>
@@ -395,26 +396,26 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y1 <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y[<span class="sc">-</span>tst, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 17/01/2024 11:02:46
+<pre><code>ASReml Version 4.2 06/03/2025 10:39:55
           LogLik        Sigma2     DF     wall
- 1     -232.3355     0.8552212    498   11:02:47
- 2     -224.1149     0.7898886    498   11:02:47
- 3     -214.8656     0.6987314    498   11:02:47
- 4     -209.2359     0.6131716    498   11:02:47
- 5     -207.4308     0.5509318    498   11:02:47
- 6     -207.3177     0.5335289    498   11:02:47
- 7     -207.3163     0.5315242    498   11:02:47</code></pre>
+ 1     -232.3355     0.8552212    498   10:39:56
+ 2     -224.1149     0.7898886    498   10:39:56
+ 3     -214.8656     0.6987314    498   10:39:56
+ 4     -209.2359     0.6131716    498   10:39:56
+ 5     -207.4308     0.5509318    498   10:39:56
+ 6     -207.3177     0.5335289    498   10:39:56
+ 7     -207.3163     0.5315242    498   10:39:56</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> wheat.Y[tst, <span class="st">"y1"</span>], </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">predict</span>(mod1, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[tst, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 17/01/2024 11:02:47
+<pre><code>ASReml Version 4.2 06/03/2025 10:39:56
           LogLik        Sigma2     DF     wall
- 1     -207.3163     0.5313973    498   11:02:48
- 2     -207.3163     0.5313950    498   11:02:48
- 3     -207.3163     0.5313899    498   11:02:48</code></pre>
+ 1     -207.3163     0.5313973    498   10:39:56
+ 2     -207.3163     0.5313950    498   10:39:56
+ 3     -207.3163     0.5313899    498   10:39:56</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(pred_gblup_asreml<span class="sc">$</span>y, pred_gblup_asreml<span class="sc">$</span>predicted.value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -437,7 +438,7 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 </div>
 </div>
 <p>where <code>varG</code> is the genetic variance, <code>varE</code> is the residual variance, and <code>accuracy</code> is the Pearson’s correlation between observed and predicted values (considering only the test set). The results are similar.</p>
-<div class="cell" data-fig.asp="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_bglr, pred_gblup_asreml, <span class="at">by =</span> <span class="st">"name"</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred<span class="sc">$</span>yhat, pred<span class="sc">$</span>predicted.value, </span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"BGLR predictions"</span>, <span class="at">ylab =</span> <span class="st">"asreml predictions"</span>)</span>
@@ -504,7 +505,7 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 </section>
 <section id="met-bglup-in-bglr" class="level1">
 <h1>MET BGLUP in BGLR</h1>
-<p>As the genotypes are repeated across environments, we need to expand the covariance matrix <code>G</code> to account for the repetitions. To do this, we perform <span class="math inline">\(Z G Z ^{'}\)</span>, where <span class="math inline">\(Z\)</span> is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, <span class="math inline">\(G\)</span> is the genetic relationship matrix, and <span class="math inline">\(Z\)</span> is the incidence matrix transposed, as explained in <span class="citation" data-cites="jarquin2014">Jarquín et al. (<a href="#ref-jarquin2014" role="doc-biblioref">2014</a>)</span>.</p>
+<p>As the genotypes are repeated across environments, we need to expand the covariance matrix <code>G</code> to account for the repetitions. To do this, we perform <span class="math inline">\(Z G Z'\)</span>, where <span class="math inline">\(Z\)</span> is the incidence matrix (also called design matrix) that connects genotypes to phenotypes, <span class="math inline">\(G\)</span> is the genetic relationship matrix, and <span class="math inline">\(Z'\)</span> is the incidence matrix transposed, as explained in <span class="citation" data-cites="jarquin2014">Jarquín et al. (<a href="#ref-jarquin2014" role="doc-biblioref">2014</a>)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">model.matrix</span>(<span class="fu">lm</span>(y <span class="sc">~</span> name <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data =</span> wheat.Y.long))) </span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>ZGZt <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> G <span class="sc">%*%</span> <span class="fu">t</span>(Z) </span>
@@ -514,7 +515,7 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 </div>
 </div>
 <p>Note that the <span class="math inline">\(Z G Z^{'}\)</span> matrix has dimension <span class="math inline">\(n \times n\)</span>, i.e., it matches the dimension of repeated genotypes across environments. You can play with <code>Z</code> to see how it looks like.</p>
-<p>Now we pass the kernel <span class="math inline">\(Z G Z^{'}\)</span> (instead of <span class="math inline">\(G\)</span>) in the linear predictor.</p>
+<p>Now we pass the kernel <span class="math inline">\(Z G Z'\)</span> (instead of <span class="math inline">\(G\)</span>) in the linear predictor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>ETA <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(<span class="at">K =</span> ZGZt, <span class="at">model =</span> <span class="st">"RKHS"</span>)) </span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>fm2 <span class="ot">&lt;-</span> <span class="fu">BGLR</span>(<span class="at">y =</span> ylongNA, <span class="at">ETA =</span> ETA, <span class="at">nIter =</span> <span class="dv">5000</span>, <span class="at">burnIn =</span> <span class="dv">1000</span>, </span>
@@ -538,22 +539,22 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">asreml</span>(y <span class="sc">~</span> <span class="dv">1</span>, <span class="at">random =</span> <span class="sc">~</span> <span class="fu">vm</span>(name, <span class="at">source =</span> G, <span class="at">singG =</span> <span class="st">"PSD"</span>), </span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> wheat.Y.long[<span class="sc">-</span>tstlong, ]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 17/01/2024 11:03:38
+<pre><code>ASReml Version 4.2 06/03/2025 10:40:39
           LogLik        Sigma2     DF     wall
- 1     -902.1607     0.8549988   1995   11:03:38
- 2     -899.6476     0.8455182   1995   11:03:38
- 3     -897.4152     0.8330925   1995   11:03:38
- 4     -896.5900     0.8236879   1995   11:03:38
- 5     -896.4757     0.8190706   1995   11:03:39
- 6     -896.4751     0.8187290   1995   11:03:39</code></pre>
+ 1     -902.1607     0.8549988   1995   10:40:39
+ 2     -899.6476     0.8455182   1995   10:40:39
+ 3     -897.4152     0.8330925   1995   10:40:39
+ 4     -896.5900     0.8236879   1995   10:40:39
+ 5     -896.4757     0.8190706   1995   10:40:40
+ 6     -896.4751     0.8187290   1995   10:40:40</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">classify =</span> <span class="st">"name"</span>)<span class="sc">$</span>pvals[, <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"predicted.value"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ASReml Version 4.2 17/01/2024 11:03:39
+<pre><code>ASReml Version 4.2 06/03/2025 10:40:40
           LogLik        Sigma2     DF     wall
- 1     -896.4751     0.8187204   1995   11:03:39
- 2     -896.4751     0.8187203   1995   11:03:39
- 3     -896.4751     0.8187202   1995   11:03:39</code></pre>
+ 1     -896.4751     0.8187204   1995   10:40:40
+ 2     -896.4751     0.8187203   1995   10:40:40
+ 3     -896.4751     0.8187202   1995   10:40:40</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pred_gblup_asreml <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> wheat.Y.long[tstlong, <span class="st">"name"</span>], </span>
@@ -582,7 +583,7 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 </div>
 </div>
 <p>The results are similar.</p>
-<div class="cell" data-fig.asp="1">
+<div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>pred_met <span class="ot">&lt;-</span> <span class="fu">merge</span>(pred_gblup_bglr, pred_gblup_asreml, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"name"</span>, <span class="st">"env"</span>))</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pred_met<span class="sc">$</span>yhat, pred_met<span class="sc">$</span>predicted.value, </span>
 <span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"BGLR predictions"</span>, <span class="at">ylab =</span> <span class="st">"asreml predictions"</span>)</span>
@@ -603,41 +604,36 @@ In this case, we are using only one kernel, i.e., the covariance matrix <code>G<
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 22.04.3 LTS
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
 
 locale:
- [1] LC_CTYPE=pt_BR.UTF-8       LC_NUMERIC=C              
- [3] LC_TIME=pt_BR.UTF-8        LC_COLLATE=pt_BR.UTF-8    
- [5] LC_MONETARY=pt_BR.UTF-8    LC_MESSAGES=pt_BR.UTF-8   
- [7] LC_PAPER=pt_BR.UTF-8       LC_NAME=C                 
- [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-[11] LC_MEASUREMENT=pt_BR.UTF-8 LC_IDENTIFICATION=C       
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 
 time zone: America/Chicago
-tzcode source: system (glibc)
+tzcode source: internal
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] asreml_4.2.0.302 Matrix_1.6-3     BGLR_1.1.1      
+[1] asreml_4.2.0.355 Matrix_1.7-2     BGLR_1.1.3      
 
 loaded via a namespace (and not attached):
- [1] vctrs_0.6.5        cli_3.6.2          knitr_1.45         rlang_1.1.3       
- [5] xfun_0.41          jsonlite_1.8.8     data.table_1.14.10 glue_1.7.0        
- [9] colorspace_2.1-0   htmltools_0.5.7    fansi_1.0.6        scales_1.3.0      
-[13] rmarkdown_2.25     grid_4.3.2         tibble_3.2.1       munsell_0.5.0     
-[17] evaluate_0.23      MASS_7.3-60.0.1    fastmap_1.1.1      yaml_2.3.8        
-[21] lifecycle_1.0.4    compiler_4.3.2     pkgconfig_2.0.3    htmlwidgets_1.6.4 
-[25] rstudioapi_0.15.0  truncnorm_1.0-9    lattice_0.22-5     digest_0.6.34     
-[29] R6_2.5.1           utf8_1.2.4         pillar_1.9.0       magrittr_2.0.3    
-[33] tools_4.3.2        gtable_0.3.4       ggplot2_3.4.4     </code></pre>
+ [1] vctrs_0.6.5       cli_3.6.4         knitr_1.49        rlang_1.1.5      
+ [5] xfun_0.50         generics_0.1.3    jsonlite_1.8.9    data.table_1.16.4
+ [9] glue_1.8.0        colorspace_2.1-1  htmltools_0.5.8.1 scales_1.3.0     
+[13] rmarkdown_2.29    grid_4.4.1        tibble_3.2.1      munsell_0.5.1    
+[17] evaluate_1.0.3    MASS_7.3-64       fastmap_1.2.0     yaml_2.3.10      
+[21] lifecycle_1.0.4   compiler_4.4.1    dplyr_1.1.4       pkgconfig_2.0.3  
+[25] htmlwidgets_1.6.4 rstudioapi_0.17.1 truncnorm_1.0-9   lattice_0.22-6   
+[29] digest_0.6.37     R6_2.6.0          tidyselect_1.2.1  pillar_1.10.1    
+[33] magrittr_2.0.3    tools_4.4.1       gtable_0.3.6      ggplot2_3.5.1    </code></pre>
 </div>
 </div>
 
@@ -1082,7 +1078,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="igorkf/igorkf.github.io" data-repo-id="R_kgDOJLX0KA" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+<script src="https://giscus.app/client.js" data-repo="igorkf/igorkf.github.io" data-repo-id="R_kgDOJLX0KA" data-category="General" data-category-id="DIC_kwDOJLX0KM4CVAgU" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">

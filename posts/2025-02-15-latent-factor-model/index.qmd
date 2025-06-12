@@ -14,34 +14,33 @@ One reason to run factor analysis is to study the linear association between var
 
 # Mathematical notation
 
-Consider we have $p$ variables represented by $X$, and all variables are standardized (centered by their mean, and scaled by their standard deviation), such that each variable has zero mean and unit variance: 
+Consider we have $p$ variables represented by $X$, and all variables are standardized (centered by their mean, and scaled by their standard deviation), such that each variable has zero mean and unit variance:
 
 $$
 X = \begin{bmatrix}
 x_1 \dots x_p
 \end{bmatrix}^T
-$$ 
+$$
 
 with mean vector $E[X] = \mu = [0 \dots 0]^T$ and covariance matrix $D[X] = \Sigma$. So, through this post, $D[.]$ will be used to denote the covariance matrix.
 
 Due to the standardization of variables, $D[X]$ has the following properties:
 
-i) Diagonal values (the variances) are one
+i)  Diagonal values (the variances) are one
 
 ii) Off-diagonal (the covariances) are $\sigma_{ij} = Cov[x_i, x_j] = Corr[x_i, x_j]$ for all $i \ne j$, because $Corr[x_i, x_j] = \frac{Cov[x_i, x_j]}{\sqrt{Var[x_i]} \sqrt{Var[x_j]}} = \frac{Cov[x_i, x_j]}{\sqrt{1} \sqrt{1}} = Cov[x_i, x_j]$
 
 This means after standardization we are working with a correlation matrix.
 
-Define a vector $f$ of random variables that we have not observed: 
+Define a vector $f$ of random variables that we have not observed:
 
 $$
 f = \begin{bmatrix}
 f_1 \dots f_k
 \end{bmatrix}^T
-$$ 
-with $k \ll n$ and $k \ll p$. By now, let's assume we know $k$.
+$$ with $k \ll n$ and $k \ll p$. By now, let's assume we know $k$.
 
-Now we can start relating $X$ with $f$. Each variable $x_i$ is related to $f$ as follows: 
+Now we can start relating $X$ with $f$. Each variable $x_i$ is related to $f$ as follows:
 
 $$
 \begin{align*}
@@ -54,7 +53,7 @@ $$
 
 where the coefficients multiplying each component of $f$ are fixed unknown parameters that need to be estimated, and $\varepsilon_1 \dots \varepsilon_p$ are random errors. They represent the parts of $x_1 \dots x_p$ that cannot be linearly explained by $f_1 \dots f_k$. As you can see, each variable is written as a linear combination of the factors plus a portion not explained by them.
 
-This system of equations can be represented in a matrix form as: 
+This system of equations can be represented in a matrix form as:
 
 $$
 \begin{bmatrix}
@@ -74,25 +73,25 @@ f_2 \\
 \vdots \\
 f_k
 \end{bmatrix}
-$$ 
+$$
 
-This can be written as: 
+This can be written as:
 
 $$
 X = L f + \varepsilon
-$$ 
+$$
 
 where $X$ is a $p \times 1$ vector, $L$ is a $p \times k$ matrix, $f$ is a $k \times 1$ vector, and $\varepsilon$ is a $p \times 1$ vector. The $L$ matrix is known as the *loading matrix* and the $f$ vector is known as the *factor scores*.
 
 Notice that all terms in the right-hand side of the equation are unknown, where $L$ is a matrix of fixed unknown parameters (that we need to estimate) and $f$ and $\varepsilon$ are unknown random vectors.
 
-Further assumptions for $f$ and $\varepsilon$ are: 
+Further assumptions for $f$ and $\varepsilon$ are:
 
 $$
 E[f] = \begin{bmatrix}
 0 \dots 0
 \end{bmatrix}^T, \ D[f] = I_k
-$$ 
+$$
 
 Notice that $D[f] = I_k$ implies that the factors are uncorrelated as we want to explain the linear correlation of $X$ variables using a set of non-correlated latent factors, otherwise the interpretation would be confounded. We further have that:
 
@@ -111,7 +110,7 @@ The last assumption is that $f$ and $\varepsilon$ are independent.
 
 # The correlation matrix
 
-As stated in the beginning, we want to study the correlation between the variables, but using the equation we derived for $X$ that involves $L$ and $f$. This correlation will be denoted as $\Sigma$. From some properties of covariances, we have that: 
+As stated in the beginning, we want to study the correlation between the variables, but using the equation we derived for $X$ that involves $L$ and $f$. This correlation will be denoted as $\Sigma$. From some properties of covariances, we have that:
 
 $$
 \begin{align*}
@@ -124,7 +123,7 @@ $$
 
 Above, two terms are zero because we assumed $f$ and $\varepsilon$ are independent.
 
-Remember that each variable has zero mean and unit variance, so all diagonal values of $\Sigma$ are one. It turns out there are some interesting results arising from the diagonal values of $\Sigma$. Let $\Sigma_{ii}$ represent the i-th diagonal value from $\Sigma$, so: 
+Remember that each variable has zero mean and unit variance, so all diagonal values of $\Sigma$ are one. It turns out there are some interesting results arising from the diagonal values of $\Sigma$. Let $\Sigma_{ii}$ represent the i-th diagonal value from $\Sigma$, so:
 
 $$
 \begin{align*}
@@ -132,9 +131,9 @@ $$
 & (LL^T)_{ii} + \underbrace{(D[\varepsilon])_{ii}}_{\sigma_i^2} = 1 \implies \\
 & (LL^T)_{ii} + \sigma_i^2 = 1
 \end{align*}
-$$ 
+$$
 
-Note we can represent the i-th diagonal value from $LL^T$ as a dot product of $L$'s i-th row: 
+Note we can represent the i-th diagonal value from $LL^T$ as a dot product of $L$'s i-th row:
 
 $$
 (LL^T)_{ii} = \begin{bmatrix}
@@ -147,7 +146,7 @@ L_{ik}
 \end{bmatrix}
 $$
 
-Plugging in into the result from before, we have: 
+Plugging in into the result from before, we have:
 
 $$
 \begin{align*}
@@ -164,11 +163,11 @@ L_{ik}
 \end{align*}
 $$
 
-This means that if we estimate $L$, we can easily find $D[\varepsilon]$. Arranging the result above, we have: 
+This means that if we estimate $L$, we can easily find $D[\varepsilon]$. Arranging the result above, we have:
 
 $$
 \underbrace{\sigma_i^2}_{\text{non-negative}} + \ \underbrace{L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2}_{\text{non-negative}} = 1
-$$ 
+$$
 
 As both quantities are non-negative, and they sum to one, we can think of them as two proportions (e.g., $30\% + 70\% = 1$ or $84\% + 16\% = 1$).
 
@@ -180,7 +179,7 @@ As both quantities are non-negative, and they sum to one, we can think of them a
 
 <!-- $$ -->
 
-As $\Sigma = D[X] = LL^T + D[\varepsilon]$, where the i-th diagonal of $\Sigma$ is $Var[x_i]$, we have that: 
+As $\Sigma = D[X] = LL^T + D[\varepsilon]$, where the i-th diagonal of $\Sigma$ is $Var[x_i]$, we have that:
 
 $$
 \Sigma_{ii} = Var[x_i] = 1 = \underbrace{L_{i1}^2 + L_{i2}^2 + \dots + L_{ik}^2}_{\text{A}} + \underbrace{\sigma_i^2}_{\text{B}}
@@ -198,7 +197,7 @@ where $\text{A}$ is the proportion of $Var[x_i]$ explained by the factors, also 
 
 # One property of the loading matrix
 
-There are many properties of the loading matrix $L$, and they are used when performing a factor analysis, but let's focus in one particular result. Pick any two variables, e.g., the i-th and the j-th, with $i \neq j$. As defined previously: 
+There are many properties of the loading matrix $L$, and they are used when performing a factor analysis, but let's focus in one particular result. Pick any two variables, e.g., the i-th and the j-th, with $i \neq j$. As defined previously:
 
 $$
 \begin{align*}
@@ -221,11 +220,11 @@ $$
 
 Many terms of this sum will disappear because:
 
-- $D[f] = I_k$, so any pair involving two different factors $f_i$ and $f_j$ will be uncorrelated
+-   $D[f] = I_k$, so any pair involving two different factors $f_i$ and $f_j$ will be uncorrelated
 
-- $f$ and $\varepsilon$ were assumed to be independent, so any pair involving one factor and one member of $\varepsilon$ will be uncorrelated
+-   $f$ and $\varepsilon$ were assumed to be independent, so any pair involving one factor and one member of $\varepsilon$ will be uncorrelated
 
-- $D[\varepsilon]$ is a diagonal matrix, so any pair of different members of $\varepsilon$ will be uncorrelated
+-   $D[\varepsilon]$ is a diagonal matrix, so any pair of different members of $\varepsilon$ will be uncorrelated
 
 Thus, the only non-zero terms are those involving the same pair of factors:
 
@@ -236,8 +235,7 @@ Cov[x_i, x_j] &= Cov[L_{i1} f_1, L_{j1} f_1] + Cov[L_{i2} f_2, L_{j2} f_2] + \do
 &= L_{i1} Var[f_1] L_{j1} + L_{i2} Var[f_2] L_{j2} + \dots + L_{ik} Var[f_k] L_{jk} \\
 &= L_{i1} L_{j1} + L_{i2} L_{j2} + \dots + L_{ik} L_{jk}
 \end{align*}
-$$
-because $D[f] = I_k$, so $Var[f_1] = Var[f_2] = \dots = Var[f_k] = 1$. Now, the result above means that:
+$$ because $D[f] = I_k$, so $Var[f_1] = Var[f_2] = \dots = Var[f_k] = 1$. Now, the result above means that:
 
 $$
 \begin{align*}
@@ -245,13 +243,11 @@ Cov[x_i, x_j] &= L_{i1} L_{j1} + L_{i2} L_{j2} + \dots + L_{ik} L_{jk} \\
 &= \text{Dot product between i-th and j-th rows of L} \\
 &= L_{i*}^T L_{j*}
 \end{align*}
-$$
-Since $Var[x_i] = Var[x_j] = 1$, we have that:
+$$ Since $Var[x_i] = Var[x_j] = 1$, we have that:
 
 $$
 Corr[x_i, x_j] = \frac{Cov[x_i, x_j]}{\sqrt{Var[x_i]} \sqrt{Var[x_j]}} = \frac{L_{i*}^T L_{j*}}{\sqrt{1} \sqrt{1}} = L_{i*}^T L_{j*}
-$$
-So, if we have $L$, calculating $Corr[x_i, x_j]$ is just taking the dot product between i-th and j-th rows of $L$. 
+$$ So, if we have $L$, calculating $Corr[x_i, x_j]$ is just taking the dot product between i-th and j-th rows of $L$.
 
 # Estimating the loading matrix
 
@@ -276,17 +272,15 @@ and
 
 $$
 D[f^*] = D[A^T f] = A^T D[f] (A^T)^T = A^T I_k A = A^TA = I_k
-$$
-So, for any orthogonal matrix $A$, using $X = Lf + \varepsilon$ or $X = (LA)(A^Tf) + \varepsilon$ is equivalent.
+$$ So, for any orthogonal matrix $A$, using $X = Lf + \varepsilon$ or $X = (LA)(A^Tf) + \varepsilon$ is equivalent.
 
 ## The connection between PCA and factor analysis
 
-As mentioned, we are going to estimate $L$ using a principal components solution. Remember that the principal components representation for $X$, where $X$ is written as a linear combination of the eigenvalues, is:
+As mentioned, we are going to estimate $L$ using a principal components solution. Remember that the principal components representation for $X$, where $X$ is written as a linear combination of the eigenvectors, is:
 
 $$
 Z = A_k (X - \mu) = A_k X
-$$
-because $X$ was standardized, with
+$$ because $X$ was standardized, with
 
 $$
 A_k = \begin{bmatrix}
@@ -408,6 +402,7 @@ Also, notice that this solution can be seen as a weighted least squares (WLS), w
 Now we are going to implement everything we saw here, and compare the results with the function `psych::fa`. We are going to use the principal components solution for estimating the loading matrix $L$ and Bartlett's method for the latent factors $f$.
 
 We are going to use a dataset from the `psych` package called `bfi`. As this is just an example, let's keep only the first five variables and remove the missing values.
+
 ```{r}
 # to read more about it, run ?psych::bfi 
 tab <- psych::bfi[, 1:5]
@@ -419,6 +414,7 @@ p
 ```
 
 The implementation from scratch to estimate the loading matrix is:
+
 ```{r}
 # standardize X
 X <- scale(tab)
@@ -442,6 +438,7 @@ L
 ```
 
 Now, compare this to the implementation of `psych::fa`:
+
 ```{r, warning = F, message = F}
 fac <- psych::fa(
   tab, nfactors = k, fm = "pa", scores = "Bartlett", 
@@ -449,9 +446,11 @@ fac <- psych::fa(
 )
 fac$loadings[]
 ```
+
 We have exactly the same solution, except that the sign of the first column is flipped. As stated in `?psych::fa`, "the order of factors and the sign of some factors may differ". This happens because the principal components solution for estimating $L$ uses eigenvectors, and eigenvectors are sign-invariant, i.e., if $u_1$ is an eigenvector, then $-u_1$ is also an eigenvector for the same corresponding eigenvalue.
 
 As shown before, to calculate the correlation between first and second variables, for example, we just take the dot product between first and second rows of $L$:
+
 ```{r}
 L[1, ] %*% L[2, ]
 ```
@@ -461,8 +460,8 @@ L[1, ] %*% L[2, ]
 fac$loadings[1, ] %*% fac$loadings[2, ]
 ```
 
-
 The implementation to compute the factor scores is:
+
 ```{r}
 # get D from L
 D <- matrix(0, p, p)
@@ -484,10 +483,12 @@ f[500:505, 1:2]  # checking some values
 ```
 
 Comparing to the implementation of `psych::fa`:
+
 ```{r}
 fac$scores[1:5, 1:2]
 fac$scores[500:505, 1:2]
 ```
+
 Again, all values are exactly the same, except for the sign of first column.
 
 # Final words

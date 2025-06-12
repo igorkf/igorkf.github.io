@@ -8,6 +8,8 @@ website:
   google-analytics: "G-3BCPXRWVV0"
   cookie-consent: true
   title: "Igor Kuivjogi Fernandes"
+  favicon: "favicon.png"
+  image: "favicon.png"
   page-footer:
     left: "Blog made with [Quarto](https://quarto.org/), by Igor Kuivjogi Fernandes. License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
   navbar:

@@ -12,4 +12,4 @@ fields: [title, description, image, date]
 comments:
   giscus:
     repo: igorkf/igorkf.github.io
-    category: Blog
+    
